@@ -4,8 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
+//Controlodor da pagina app.html
 @Component({
   templateUrl: 'app.html'
 })
@@ -14,15 +14,16 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
+ //array com os componentes do menu
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    //lista de paginas que compoem o menu
+    //em component utilizar o nome informado no controlador
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Home', component: HomePage }
     ];
 
   }
