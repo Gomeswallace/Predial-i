@@ -3,8 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-
 //Controlodor da pagina app.html
 @Component({
   templateUrl: 'app.html'
@@ -12,10 +10,13 @@ import { HomePage } from '../pages/home/home';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  //rootPage indica qual a pagina inicial
+  //alterado o tipo para string devido a criacao do modulo para home e utilizaado
+  //o IonicPage no controlador
+  rootPage: string = 'HomePage';
 
  //array com os componentes do menu
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -23,7 +24,7 @@ export class MyApp {
     //lista de paginas que compoem o menu
     //em component utilizar o nome informado no controlador
     this.pages = [
-      { title: 'Home', component: HomePage }
+      { title: 'Home', component: 'HomePage' }
     ];
 
   }
