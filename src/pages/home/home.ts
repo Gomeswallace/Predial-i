@@ -15,4 +15,8 @@ export class HomePage {
 
   }
 
+  login(){
+    this.navCtrl.setRoot("DispositivosPage");
+  }
+
 }
