@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { MenuController }  from 'ionic-angular/components/app/menu-controller';
 
 //ionicPage informa que a e uma pagina e pode ser referenciada o nome como String
 @IonicPage()
@@ -10,9 +11,16 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 //declaracao de uma classe
 export class HomePage {
+//MenuController injetar a dependencia para desabilitar o menu da tela inicial
+//ver em ionic lyfecycle events
+  constructor(public navCtrl: NavController, public menu: MenuController) {
+  }
 
-  constructor(public navCtrl: NavController) {
-
+  ionViewWillEnter(){
+  this.menu.swipeEnable(false);
+  }
+  ionViewDidLeave(){
+    this.menu.swipeEnable(true);
   }
 
   login(){
