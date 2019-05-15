@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
@@ -6,7 +7,7 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { DispositivoService } from "../services/domain/dispositivo.service";
 //anotacao do DECORATOR que contem configuracao para alterar a classe
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   //import de modulos que sao utilizados neste modulo
   imports: [
     BrowserModule,
+    //HttpClientModule modulo para implementar os servicos http
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   //bootstrap informa como o app vai iniciar
@@ -31,7 +34,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    //instaciar um DispositivoService para toda a aplicacao
+    DispositivoService
   ]
 })
 export class AppModule {} //uma classe sem corpo nenhum e export para ser utilizado em outra classe
