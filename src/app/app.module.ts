@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DispositivoService } from "../services/domain/dispositivo.service";
+
 //anotacao do DECORATOR que contem configuracao para alterar a classe
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { DispositivoService } from "../services/domain/dispositivo.service";
     MyApp
     //HomePage
   ],
-  //declacao de classes que sejam uma estancia unica para esse modulo
+  //declacao de classes que sejam uma estancia unica para o projeto
   providers: [
     StatusBar,
     SplashScreen,
