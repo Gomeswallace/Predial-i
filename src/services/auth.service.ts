@@ -1,0 +1,25 @@
+import { Injectable } from "@angular/core";
+import { CredenciaisDTO } from "../models/credenciais.dto";
+import { HttpClient } from "@angular/common/http";
+import { API_CONFIG } from "../config/api.config";
+
+@Injectable()
+export class AuthService{
+
+    constructor(public http : HttpClient){
+
+    }
+
+    authenticate(creds : CredenciaisDTO){
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/login`, 
+            creds,
+            //objeto que especifica os dados da requisicao
+            {
+                //para pegar o header da resposta, que fica dentro do response
+                observe : 'response',
+                //login retorna a resposta vazia e precisa ser texto para nao fazer o parse de Json 
+                responseType : 'text'
+            } );
+    }
+}
