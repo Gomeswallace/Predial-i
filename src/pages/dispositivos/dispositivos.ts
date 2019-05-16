@@ -32,8 +32,6 @@ export class DispositivosPage {
       .subscribe(response => { //funcao anonima callback sera executada qdo a resposta chegar
         this.dispositivos = response;
       },
-      error => { //outra funcao callback
-        console.log(error);
-      });
+      error => {});
   }
 }

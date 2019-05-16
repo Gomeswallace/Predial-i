@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DispositivoService } from "../services/domain/dispositivo.service";
+import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 
 //anotacao do DECORATOR que contem configuracao para alterar a classe
 @NgModule({
@@ -37,7 +38,8 @@ import { DispositivoService } from "../services/domain/dispositivo.service";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     //instaciar um DispositivoService para toda a aplicacao
-    DispositivoService
+    DispositivoService,
+    ErrorInterceptorProvider
   ]
 })
 export class AppModule {} //uma classe sem corpo nenhum e export para ser utilizado em outra classe
