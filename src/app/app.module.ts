@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DispositivoService } from "../services/domain/dispositivo.service";
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
 
 //anotacao do DECORATOR que contem configuracao para alterar a classe
 @NgModule({
@@ -41,7 +42,8 @@ import { AuthService } from '../services/auth.service';
     //instaciar um DispositivoService para toda a aplicacao
     DispositivoService,
     ErrorInterceptorProvider,
-    AuthService
+    AuthService,
+    StorageService
   ]
 })
 export class AppModule {} //uma classe sem corpo nenhum e export para ser utilizado em outra classe
