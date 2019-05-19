@@ -11,6 +11,7 @@ import { DispositivoService } from "../services/domain/dispositivo.service";
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
+import { UsuarioService } from '../services/domain/usuario.service';
 
 //anotacao do DECORATOR que contem configuracao para alterar a classe
 @NgModule({
@@ -43,7 +44,8 @@ import { StorageService } from '../services/storage.service';
     DispositivoService,
     ErrorInterceptorProvider,
     AuthService,
-    StorageService
+    StorageService,
+    UsuarioService
   ]
 })
 export class AppModule {} //uma classe sem corpo nenhum e export para ser utilizado em outra classe
