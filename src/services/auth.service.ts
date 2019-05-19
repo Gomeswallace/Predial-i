@@ -9,6 +9,7 @@ import { JwtHelper } from "angular2-jwt";
 @Injectable()
 export class AuthService{
 
+
     jwtHelper : JwtHelper = new JwtHelper();
 
     constructor(
@@ -31,10 +32,12 @@ export class AuthService{
     }
 
     successfulLogin(authorizationValue : string){
+        //retirar o barrer do header
         let tok = authorizationValue.substring(7);
         let user : LocalUser = {
             token : tok,
             email : this.jwtHelper.decodeToken(tok).sub           
+            //.sub funcao do Jwthelper para extrair o email do token
         };
 
         this.storage.setLocalUser(user);

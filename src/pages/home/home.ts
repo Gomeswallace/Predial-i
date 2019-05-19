@@ -28,8 +28,9 @@ export class HomePage {
   }
 
   ionViewWillEnter(){
-  this.menu.swipeEnable(false);
+    this.menu.swipeEnable(false);
   }
+  
   ionViewDidLeave(){
     this.menu.swipeEnable(true);
   }
