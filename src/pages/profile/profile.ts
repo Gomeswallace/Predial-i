@@ -29,7 +29,14 @@ export class ProfilePage {
                   this.usuario = response;
                   //buscar imagem
                 },
-                error => {});
+                error => {
+                  if(error.status == 403){
+                    this.navCtrl.setRoot('HomePage');
+                  }
+
+                });
+    } else{
+      this.navCtrl.setRoot('HomePage');
     }
     console.log('ionViewDidLoad ProfilePage');
   }
