@@ -12,6 +12,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
+import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
 //anotacao do DECORATOR que contem configuracao para alterar a classe
 @NgModule({
@@ -42,6 +43,8 @@ import { UsuarioService } from '../services/domain/usuario.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     //instaciar um DispositivoService para toda a aplicacao
     DispositivoService,
+    //colocar o AuthInterceptorProvider antes do ErrorInterceptor para garantir a ordem da execucao
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
