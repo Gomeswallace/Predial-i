@@ -31,6 +31,19 @@ export class AuthService{
             } );
     }
 
+    refreshToken(){
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/auth/refresh_token`, 
+            {},
+            //objeto que especifica os dados da requisicao
+            {
+                //para pegar o header da resposta, que fica dentro do response
+                observe : 'response',
+                //retorna a resposta vazia e precisa ser texto para nao fazer o parse de Json 
+                responseType : 'text'
+            } );
+    }
+
     successfulLogin(authorizationValue : string){
         //retirar o barrer do header
         let tok = authorizationValue.substring(7);
