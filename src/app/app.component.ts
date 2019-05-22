@@ -29,9 +29,9 @@ export class MyApp {
     //lista de paginas que compoem o menu
     //em component utilizar o nome informado no controlador
     this.pages = [
-      { title: 'Home', component: 'HomePage' },
-      { title: 'Profile', component: 'ProfilePage' },
+      { title: 'Home', component: 'HomePage' },    
       { title: 'Dispositivos', component: 'DispositivosPage' },
+      { title: 'Profile', component: 'ProfilePage' },
       { title: 'Sair', component: '' }
     ];
 

@@ -15,6 +15,6 @@ export class DispositivoService {
     //Observable pq e uma requisicao assincrona e fica aguardando a resposta
     findAll() : Observable<DispositivoDTO[]>  {
         //a crase permite utilizar variavel sem precisar concatenar com string
-        return this.http.get<DispositivoDTO[]>(`${API_CONFIG.baseUrl}/dispositivoss`);
+        return this.http.get<DispositivoDTO[]>(`${API_CONFIG.baseUrl}/dispositivos`);
     }
 }
