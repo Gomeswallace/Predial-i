@@ -34,4 +34,8 @@ export class DispositivosPage {
       },
       error => {});
   }
+
+  showAmbientes(){
+    this.navCtrl.push('AmbientesPage');
+  }
 }

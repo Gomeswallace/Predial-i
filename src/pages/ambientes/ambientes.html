@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToogle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ambientes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor="let item of itens">
+      <ion-thumbnail ion-start>
+        <img [src]="item.imageUrl || 'assetes/imgs/ambiente.jpg'">
+      </ion-thumbnail>
+    </button>
+  </ion-list>
+</ion-content>

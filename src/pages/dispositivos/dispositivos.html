@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let dispositivo of dispositivos">
+    <button ion-item *ngFor="let dispositivo of dispositivos" (click)="showAmbientes()">
       <ion-thumbnail item-start>
         <img src="img/thumbnail-tororo.png">
       </ion-thumbnail>
