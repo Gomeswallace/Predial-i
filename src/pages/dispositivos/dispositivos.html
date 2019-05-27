@@ -1,15 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    
     <ion-title>Dispositivos</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let dispositivo of dispositivos" (click)="showAmbientes()">
+    <button ion-item *ngFor="let dispositivo of dispositivos" (click)="showAmbientes(dispositivo.id)">
       <ion-thumbnail item-start>
         <img src="img/thumbnail-tororo.png">
       </ion-thumbnail>

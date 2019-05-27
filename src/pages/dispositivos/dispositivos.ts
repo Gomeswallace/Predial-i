@@ -35,7 +35,7 @@ export class DispositivosPage {
       error => {});
   }
 
-  showAmbientes(){
-    this.navCtrl.pop('AmbientesPage');
+  showAmbientes(dispositivo_id: string){
+    this.navCtrl.push('AmbientesPage', {disp_id: dispositivo_id});
   }
 }
