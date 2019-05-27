@@ -36,6 +36,6 @@ export class DispositivosPage {
   }
 
   showAmbientes(){
-    this.navCtrl.push('AmbientesPage');
+    this.navCtrl.pop('AmbientesPage');
   }
 }
