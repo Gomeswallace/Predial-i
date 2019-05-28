@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Equipamentos</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-list>
+      <button ion-item *ngFor="let item of itens">
+        <ion-thumbnail ion-start>
+          <img [src]="item.imageUrl || 'assets/imgs/sem-imagem.jpg'">      
+        </ion-thumbnail>
+        <h2>{{item.nome}}</h2>
+        <h3>{{item.descricao}}</h3>
+        <h3>{{item.dispositivoId}}</h3>
+      </button>
+    </ion-list>
+  </ion-content>
+  

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToogle>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Ambientes</ion-title>
@@ -9,10 +9,13 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item of itens">
+    <button ion-item *ngFor="let item of itens" (click)="showEquipamentos(item.id)">
       <ion-thumbnail ion-start>
-        <img [src]="item.imageUrl || 'assetes/imgs/sem-imagem.jpg'">
+        <img [src]="item.imageUrl || 'assets/imgs/sem-imagem.jpg'">      
       </ion-thumbnail>
+      <h2>{{item.nome}}</h2>
+      <h3>{{item.descricao}}</h3>
+      <h3>{{item.ambienteId}}</h3>
     </button>
   </ion-list>
 </ion-content>

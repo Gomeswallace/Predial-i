@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AmbienteService } from '../../services/domain/ambiente.service';
+import { AmbienteDTO } from '../../models/ambiente.dto';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,7 @@ import { AmbienteService } from '../../services/domain/ambiente.service';
 
 export class AmbientesPage {
 
-  itens : any[];
+  itens : AmbienteDTO[];
 
   constructor(
     public navCtrl: NavController, 
@@ -19,7 +20,6 @@ export class AmbientesPage {
   }
 
   ionViewDidLoad() {
-
     let dispositivo_id = this.navParams.get('disp_id');
     this.ambienteService.findByDispositivo(dispositivo_id)
             .subscribe(response => {
@@ -27,4 +27,9 @@ export class AmbientesPage {
             },
             error => {});
 
+  }
+
+  showEquipamentos(equipamento_id: string){
+    this.navCtrl.push('EquipamentosPage', {equip_id: equipamento_id});
+  }
 }
