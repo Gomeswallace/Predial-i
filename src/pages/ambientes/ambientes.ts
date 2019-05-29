@@ -33,7 +33,7 @@ export class AmbientesPage {
   }
 
   adicionar(dispositivo_id: string){
-    this.navCtrl.push('AdicionarAmbientePage', {disp_id: dispositivo_id});
+    this.navCtrl.push('AmbienteInserirPage', {disp_id: dispositivo_id});
   }
 }
 

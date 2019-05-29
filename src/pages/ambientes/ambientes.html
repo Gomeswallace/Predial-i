@@ -9,17 +9,17 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item? of ambientes" (click)="showEquipamentos(item.id)">
+    <button ion-item *ngFor="let item of ambientes" (click)="showEquipamentos(item.id)">
       <ion-thumbnail ion-start>
         <img [src]="item.imageUrl || 'assets/imgs/sem-imagem.jpg'">      
       </ion-thumbnail>
-      <h2>{{item?.id}}</h2>
-      <p>{{item?.nome}}</p>
-      <p>{{item?.descricao}}</p>
+      <h2>{{item.id}}</h2>
+      <p>{{item.nome}}</p>
+      <p>{{item.descricao}}</p>
     </button>
   </ion-list>
   
-  <ion-fab bottom right mini (click)="adicionar(item.dispositivoId)">
+  <ion-fab bottom right mini (click)="adicionar(item?.dispositivoId)">
     <button ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>
