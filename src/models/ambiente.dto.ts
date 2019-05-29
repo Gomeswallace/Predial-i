@@ -1,11 +1,12 @@
 export interface AmbienteDTO{
     id: string;
     nome: string;
-    descricao: string;
+    descricao: string;  
     equipamentoNome: string;
-    equipameentoPorta: number;
+    equipameentoPorta: string;
     equipamentoStatus: boolean;
     equipamentoTipo: string;
-    dispositivoId: number;
-  }
+    dispositivoId: string;
+}
+
   

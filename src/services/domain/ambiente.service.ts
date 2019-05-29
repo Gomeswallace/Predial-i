@@ -17,7 +17,6 @@ export class AmbienteService {
     }
 
     findByDispositivo(dispositivo_id : string, page : number = 0, linesPerPage : number = 24) {
-        console.log('aaa ' + this.http.get(`${API_CONFIG.baseUrl}/ambientes/?dispositivo=${dispositivo_id}&page=${page}&linesPerPage=${linesPerPage}`));
-        return this.http.get(`${API_CONFIG.baseUrl}/ambientes/?dispositivo=${dispositivo_id}&page=${page}&linesPerPage=${linesPerPage}`);
+        return this.http.get(`${API_CONFIG.baseUrl}/ambientes/page/?dispositivo=${dispositivo_id}&page=${page}&linesPerPage=${linesPerPage}`);
       }  
 }

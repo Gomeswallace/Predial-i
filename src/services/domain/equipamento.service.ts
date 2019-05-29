@@ -17,6 +17,6 @@ export class EquipamentoService {
     }
 
     findByAmbiente(ambiente_id : string, page : number = 0, linesPerPage : number = 24) {
-        return this.http.get(`${API_CONFIG.baseUrl}/equipamentos/?ambiente=${ambiente_id}&page=${page}&linesPerPage=${linesPerPage}`);
+        return this.http.get(`${API_CONFIG.baseUrl}/equipamentos/page/?ambiente=${ambiente_id}&page=${page}&linesPerPage=${linesPerPage}`);
       }  
 }

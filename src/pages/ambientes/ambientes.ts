@@ -11,7 +11,7 @@ import { AmbienteDTO } from '../../models/ambiente.dto';
 
 export class AmbientesPage {
 
-  itens : AmbienteDTO[];
+  ambientes: AmbienteDTO[];
 
   constructor(
     public navCtrl: NavController, 
@@ -22,14 +22,18 @@ export class AmbientesPage {
   ionViewDidLoad() {
     let dispositivo_id = this.navParams.get('disp_id');
     this.ambienteService.findByDispositivo(dispositivo_id)
-            .subscribe(response => {
-              this.itens = response['content'];
+            .subscribe(response => {          
+              this.ambientes = response['content'];
             },
             error => {});
-
   }
 
   showEquipamentos(equipamento_id: string){
     this.navCtrl.push('EquipamentosPage', {equip_id: equipamento_id});
   }
+
+  adicionar(dispositivo_id: string){
+    this.navCtrl.push('AdicionarAmbientePage', {disp_id: dispositivo_id});
+  }
 }
+
