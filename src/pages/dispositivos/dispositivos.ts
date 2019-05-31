@@ -38,4 +38,8 @@ export class DispositivosPage {
   showAmbientes(dispositivo_id: string){
     this.navCtrl.push('AmbientesPage', {disp_id: dispositivo_id});
   }
+
+  adicionar(){
+    this.navCtrl.push('DispositivoInserirPage');
+  }
 }

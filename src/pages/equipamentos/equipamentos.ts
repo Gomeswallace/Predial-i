@@ -27,4 +27,7 @@ export class EquipamentosPage {
             error => {});
   }
 
+  adicionar(ambiente_id: string){
+    this.navCtrl.push('EquipamentoInserirPage', {amb_id: ambiente_id});
+  }
 }

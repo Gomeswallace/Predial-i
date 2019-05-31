@@ -18,5 +18,11 @@
         <h3>{{item.dispositivoId}}</h3>
       </button>
     </ion-list>
+
+    <ion-fab bottom right mini (click)="adicionar(item.ambienteId)">
+      <button ion-fab>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
   </ion-content>
   

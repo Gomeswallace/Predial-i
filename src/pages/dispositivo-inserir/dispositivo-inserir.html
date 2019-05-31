@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Inserir Dispositivo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="$event.preventDefault()">
+    <!-- Input with placeholder 
+    <ion-input placeholder="Enter Input"></ion-input>
+    
+    <ion-input type="number" value="333"></ion-input>
+    
+    <ion-input value="Disabled" disabled></ion-input>
+    
+    <ion-input value="Readonly" readonly></ion-input>
+    -->
+    <!-- Inputs with labels -->
+    <ion-item>
+      <ion-label>Nome do dispositivo</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descrição</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Tipo Dispositivo*</ion-label>
+      <ion-select formControlName="dispositivoTiposId">
+        <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </form>
+  <button ion-button block (click)="Cadastrar()"  [disabled]="formGroup.invalid">Cadastrar</button>
+  </ion-content>
+  
