@@ -21,7 +21,12 @@ import { DispositivoTipoService } from '../../services/domain/dispositivoTipo.se
 export class DispositivoInserirPage {
 
   formGroup: FormGroup;
-  dispositivo: DispositivoDTO;
+  dispositivo: DispositivoDTO = {
+      id: "",
+      nome: "",
+      descricao: "",
+      tipo: "" 
+  }
   tipos: DispositivoTipoDTO[];
 
   constructor(
@@ -30,8 +35,10 @@ export class DispositivoInserirPage {
       public formBuilder: FormBuilder,
       public dispositivoTipoService: DispositivoTipoService,
       public dispositivoService: DispositivoService) {
-
         this.formGroup = this.formBuilder.group({
+          id : [],
+          nome : [],
+          descricao : [],
           dispositivoTiposId : [null, [Validators.required]]
         });
       }
@@ -45,7 +52,8 @@ export class DispositivoInserirPage {
     error => {});
 }  
 
-  Cadastrar(){
+  inserir(){
+    console.log(this.formGroup.value);
     //this.dispositivoService.inserir();
   }
 
