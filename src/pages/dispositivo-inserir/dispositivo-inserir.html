@@ -1,21 +1,31 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Inserir Dispositivo</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="formGroup" (ngSubmit)="$event.preventDefault()">
+  <form [formGroup]="formGroup">
     <ion-item>
       <ion-label stacked>Nome do dispositivo</ion-label>
-      <ion-input name="nome" type="text"></ion-input>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" color="danger">
+      <div [hidden]="!formGroup.controls.nome.errors.required">
+        O campo é obrigatório!
+      </div>  
     </ion-item>
     <ion-item>
       <ion-label stacked>Descrição</ion-label>
-      <ion-input name="descricao" type="text"></ion-input>
+      <ion-input type="text" formControlName="descricao"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!formGroup.controls.descricao.valid && (formGroup.controls.descricao.dirty || formGroup.controls.descricao.touched)" color="danger">
+      <div [hidden]="!formGroup.controls.descricao.errors.required">
+        O campo é obrigatório!
+      </div>  
     </ion-item>
     <ion-item>
       <ion-label stacked>Tipo Dispositivo*</ion-label>
@@ -23,7 +33,14 @@
         <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
       </ion-select>
     </ion-item>
+    <ion-item *ngIf="!formGroup.controls.dispositivoTiposId.valid && (formGroup.controls.dispositivoTiposId.dirty || formGroup.controls.dispositivoTiposId.touched)" color="danger">
+      <div [hidden]="!formGroup.controls.dispositivoTiposId.errors.required">
+        O campo é obrigatório!
+      </div>  
+    </ion-item>
   </form>
-  <button ion-button block (click)="inserir()"  [disabled]="formGroup.invalid">Cadastrar</button>
+  <div padding>
+    <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Cadastrar</button>
+  </div>
   </ion-content>
   
