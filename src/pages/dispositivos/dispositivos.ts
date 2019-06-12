@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { DispositivoService } from '../../services/domain/dispositivo.service';
 import { DispositivoDTO } from '../../models/dispositivo.dto';
-
-
-/**
- * Generated class for the DispositivosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,7 +15,8 @@ export class DispositivosPage {
   constructor(    
       public navCtrl: NavController, 
       public navParams: NavParams,
-      public dispositivoService: DispositivoService) {
+      public dispositivoService: DispositivoService,
+      public toast: ToastController) {
     }
 
   ionViewDidLoad() {
@@ -39,7 +32,23 @@ export class DispositivosPage {
     this.navCtrl.push('AmbientesPage', {disp_id: dispositivo_id});
   }
 
-  adicionar(){
+  addDispositivo(){
     this.navCtrl.push('DispositivoInserirPage');
   }
+
+  editDispositivo(disp : DispositivoDTO ){
+    this.navCtrl.push('DispositivoInserirPage', {dispositivo : disp});
+  }
+  
+  removeDispositivo(id : string){
+    this.dispositivoService.delete(id)
+    .subscribe(response => {
+      this.toast.create({ message : 'Dispositivo removido com sucesso!', duration: 3000 }).present();
+      this.navCtrl.setRoot('DispositivosPage');},
+      error => {(e) => {
+        this.toast.create({ message : 'Erro ao salvar Dispositivo', duration: 3000 }).present();
+        console.error(e);
+      }});
+  }
+  
 }

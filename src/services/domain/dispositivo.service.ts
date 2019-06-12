@@ -19,19 +19,19 @@ export class DispositivoService {
     }
 
     find(id: string){
-        return this.http.get<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/id?value=${id}`);
+        return this.http.get<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/${id}`);
     }
 
-    inserir(dispositivo: DispositivoDTO){   
+    insert(dispositivo: DispositivoDTO){   
         if(dispositivo.id){
-            return this.http.put<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/id?value=${dispositivo}`, dispositivo);
+            return this.http.put<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/${dispositivo.id}`, dispositivo);
         }else{
             return this.http.post(`${API_CONFIG.baseUrl}/dispositivos/`, dispositivo);
         }
     }
 
     delete(id: string){
-        return this.http.delete<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/id?value=${id}`);
+        return this.http.delete<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/${id}`);
     }
 
 }

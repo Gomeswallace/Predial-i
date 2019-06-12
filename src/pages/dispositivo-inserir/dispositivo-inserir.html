@@ -13,31 +13,37 @@
       <ion-label stacked>Nome do dispositivo</ion-label>
       <ion-input type="text" formControlName="nome"></ion-input>
     </ion-item>
-    <ion-item *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" color="danger">
+    <p class="danger" *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" margin-left>Valor inválido</p>
+    <!--<ion-item *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" color="danger">
       <div [hidden]="!formGroup.controls.nome.errors.required">
         O campo é obrigatório!
       </div>  
     </ion-item>
+  -->
     <ion-item>
       <ion-label stacked>Descrição</ion-label>
       <ion-input type="text" formControlName="descricao"></ion-input>
     </ion-item>
-    <ion-item *ngIf="!formGroup.controls.descricao.valid && (formGroup.controls.descricao.dirty || formGroup.controls.descricao.touched)" color="danger">
+    <p class="danger" *ngIf="!formGroup.controls.descricao.valid && (formGroup.controls.descricao.dirty || formGroup.controls.descricao.touched)" margin-left>Valor inválido</p>
+    <!--<ion-item *ngIf="!formGroup.controls.descricao.valid && (formGroup.controls.descricao.dirty || formGroup.controls.descricao.touched)" color="danger">
       <div [hidden]="!formGroup.controls.descricao.errors.required">
         O campo é obrigatório!
       </div>  
     </ion-item>
+  -->
     <ion-item>
       <ion-label stacked>Tipo Dispositivo*</ion-label>
-      <ion-select formControlName="dispositivoTiposId">
+      <ion-select formControlName="idTipo">
         <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!formGroup.controls.dispositivoTiposId.valid && (formGroup.controls.dispositivoTiposId.dirty || formGroup.controls.dispositivoTiposId.touched)" color="danger">
-      <div [hidden]="!formGroup.controls.dispositivoTiposId.errors.required">
+    <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor
+    <!--<ion-item *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" color="danger">
+      <div [hidden]="!formGroup.controls.idTipo.errors.required">
         O campo é obrigatório!
       </div>  
     </ion-item>
+  -->
   </form>
   <div padding>
     <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Cadastrar</button>

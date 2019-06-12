@@ -10,6 +10,7 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 })
 export class SignupPage {
 
+  title: string;
   formGroup: FormGroup;
   
   constructor(
@@ -18,12 +19,19 @@ export class SignupPage {
       public formBuilder: FormBuilder,
       public usuarioService: UsuarioService,
       public alertCtrl: AlertController) {
+
+        this.setupPageTitle();
+
         this.formGroup = this.formBuilder.group({
           nome: ['Joaquim', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
           email: ['joaquim@gmail.com', [Validators.required, Validators.email]],          
           senha : ['321', [Validators.required]],
           tipo : ['2']     
         });
+  }
+
+  private setupPageTitle(){
+    this.title = 'Cadastro';
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DispositivoService } from '../../services/domain/dispositivo.service';
 import { DispositivoDTO } from '../../models/dispositivo.dto';
 import { DispositivoTipoDTO } from '../../models/dispositivoTipo.dto';
@@ -27,12 +27,7 @@ export class DispositivoInserirPage {
       public dispositivoService: DispositivoService,
       public alertCtrl: AlertController,
       public toast: ToastController) {
-        //this.formGroup = this.formBuilder.group({
-        //  id : [],
-        //  nome : [],
-        //  descricao : [],
-        //  dispositivoTiposId : [null, [Validators.required]]
-        //});
+        this.formGroup = this.formBuilder.group({});
 
         this.dispositivo = this.navParams.data.dispositivo || {};
         this.setupPageTitle();
@@ -43,32 +38,31 @@ ionViewDidLoad() {
     this.dispositivoTipoService.findAll()
     .subscribe(response => {
       this.tipos = response;
-      this.formGroup.controls.dispositivoTiposId.setValue(this.tipos[0].id);
+      this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
     },
     error => {});
 }  
 
 private setupPageTitle(){
-  this.title = this.navParams.data.dispositivo ? 'Alterando Dispositivo' : 'Novo Dispositivio';
+  this.title = this.navParams.data.dispositivo ? 'Alterando Dispositivo' : 'Novo Dispositivo';
 }
 
 createFrom(){
   this.formGroup = this.formBuilder.group({
     id: [this.dispositivo.id],
-    nome: [this.dispositivo.nome, Validators.required],
-    descricao: [this.dispositivo.descricao, Validators.required],
-    dispositivoTiposId: [this.dispositivo.tipo, Validators.required],
+    nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+    descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+    idTipo: [this.dispositivo.idTipo, [Validators.required]]
   });
 }
 
 onSubmit(){
-  console.log(this.formGroup.value);
   if(this.formGroup.valid){
-    this.dispositivoService.inserir(this.formGroup.value)
+    this.dispositivoService.insert(this.formGroup.value)
     .subscribe(response => {
-      //this.showInsertOk();
-      this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
-      this.navCtrl.pop();
+      this.showInsertOk();
+      //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
+      this.navCtrl.setRoot('DispositivosPage');
     },
     error => {(e) => {
       this.toast.create({ message : 'Erro ao salvar Dispositivo', duration: 3000 }).present();
@@ -85,7 +79,7 @@ showInsertOk(){
     buttons:[
       {
         text: 'OK',
-        handler : () => { this.navCtrl.pop(); }
+        handler : () => { this.navCtrl.setRoot('DispositivosPage'); }
       }
     ]
   });

@@ -26,6 +26,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             console.log(errorObj);
 
             switch(errorObj.status){
+                case 102:
+                    this.handle102(errorObj);
+                    break;
+
                 case 401:
                     this.handle401();
                     break;
@@ -37,6 +41,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                 case 422 : 
                     this.handle422(errorObj);
                     break;
+                case 500 : 
+                    this.handle500();
+                    break;        
 
                 default :
                     this.handleDefaultError(errorObj);
@@ -45,8 +52,22 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             return Observable.throw(error);
         }) as any;
-    } 
+    }
 
+    handle102(errorObj){
+        let alert = this.alertCtrl.create({
+            title: 'Erro 102: Erro de conexão',
+            message: this.listErrors(errorObj.errors),
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'OK',
+                }
+            ]
+        });
+        alert.present();
+    }
+    
     handle401(){
         let alert = this.alertCtrl.create({
             title: 'Erro 401: falha de autenticação',
@@ -77,6 +98,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             ]
         });
         alert.present();
+    }
+
+    handle500(){
+        this.storage.setLocalUser(null);
     }
 
     handleDefaultError(errorObj){
