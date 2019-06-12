@@ -52,7 +52,7 @@ createFrom(){
     id: [this.dispositivo.id],
     nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
     descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-    idTipo: [this.dispositivo.idTipo, [Validators.required]]
+    idTipo: [this.dispositivo.dispositivoId, [Validators.required]]
   });
 }
 

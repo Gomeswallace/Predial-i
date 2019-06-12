@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AmbienteService } from '../../services/domain/ambiente.service';
 import { AmbienteDTO } from '../../models/ambiente.dto';
 
@@ -16,14 +16,15 @@ export class AmbientesPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public ambienteService: AmbienteService) {
+    public ambienteService: AmbienteService,
+    public toast: ToastController) {
   }
 
   ionViewDidLoad() {
     let dispositivo_id = this.navParams.get('disp_id');
     this.ambienteService.findByDispositivo(dispositivo_id)
             .subscribe(response => {          
-              this.ambientes = response['content'];
+              this.ambientes = response;
             },
             error => {});
   }
@@ -32,8 +33,23 @@ export class AmbientesPage {
     this.navCtrl.push('EquipamentosPage', {equip_id: equipamento_id});
   }
 
-  adicionar(dispositivo_id: string){
+  addAmbiente(dispositivo_id: string){
     this.navCtrl.push('AmbienteInserirPage', {disp_id: dispositivo_id});
   }
+
+  editAmbiente(ambie : AmbienteDTO ){
+    this.navCtrl.push('AmbienteInserirPage', {ambiente : ambie});
+  }
+  
+  removeAmbiente(id : string){
+    this.ambienteService.delete(id)
+    .subscribe(response => {
+      this.toast.create({ message : 'Ambiente removido com sucesso!', duration: 3000 }).present();
+      this.navCtrl.setRoot('AmbientesPage');},
+      error => {(e) => {
+        this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 3000 }).present();
+        console.error(e);
+      }});
+  }  
 }
 

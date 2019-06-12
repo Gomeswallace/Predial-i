@@ -16,7 +16,19 @@ export class AmbienteService {
         return this.http.get<AmbienteDTO[]>(`${API_CONFIG.baseUrl}/ambientes`);
     }
 
-    findByDispositivo(dispositivo_id : string, page : number = 0, linesPerPage : number = 24) {
-        return this.http.get(`${API_CONFIG.baseUrl}/ambientes/page/?dispositivo=${dispositivo_id}&page=${page}&linesPerPage=${linesPerPage}`);
-      }  
+    findByDispositivo(dispositivo_id : string) : Observable<AmbienteDTO[]> {
+        return this.http.get<AmbienteDTO[]>(`${API_CONFIG.baseUrl}/ambientes/page/?dispositivo=${dispositivo_id}`);
+    }
+    
+    insert(ambiente: AmbienteDTO){   
+        if(ambiente.id){
+            return this.http.put<AmbienteDTO>(`${API_CONFIG.baseUrl}/ambientes/${ambiente.id}`, ambiente);
+        }else{
+            return this.http.post(`${API_CONFIG.baseUrl}/ambientes/`, ambiente);
+        }
+    }
+
+    delete(id: string){
+        return this.http.delete<AmbienteDTO>(`${API_CONFIG.baseUrl}/ambientes/${id}`);
+    }
 }

@@ -1,53 +1,30 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Inserir novo Ambientes</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-<!-- Default Input -->
-<ion-input></ion-input>
-
-<!-- Input with value -->
-<ion-input value="custom"></ion-input>
-
-<!-- Input with placeholder -->
-<ion-input placeholder="Enter Input"></ion-input>
-
-<!-- Input with clear button when there is a value -->
-<ion-input clearInput value="clear me"></ion-input>
-
-<!-- Number type input -->
-<ion-input type="number" value="333"></ion-input>
-
-<!-- Disabled input -->
-<ion-input value="Disabled" disabled></ion-input>
-
-<!-- Readonly input -->
-<ion-input value="Readonly" readonly></ion-input>
-
-<!-- Inputs with labels -->
-<ion-item>
-  <ion-label>Default Label</ion-label>
-  <ion-input></ion-input>
-</ion-item>
-
-<ion-item>
-  <ion-label position="floating">Floating Label</ion-label>
-  <ion-input></ion-input>
-</ion-item>
-
-<ion-item>
-  <ion-label position="fixed">Fixed Label</ion-label>
-  <ion-input></ion-input>
-</ion-item>
-
-<ion-item>
-  <ion-label position="stacked">Stacked Label</ion-label>
-  <ion-input></ion-input>
-</ion-item>
-</ion-content>
+    <form [formGroup]="formGroup">
+      <ion-item>
+        <ion-label stacked>Nome do ambiente</ion-label>
+        <ion-input type="text" formControlName="nome"></ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" margin-left>Valor inválido</p>
+  
+      <ion-item>
+        <ion-label stacked>Descrição</ion-label>
+        <ion-input type="text" formControlName="descricao"></ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="!formGroup.controls.descricao.valid && (formGroup.controls.descricao.dirty || formGroup.controls.descricao.touched)" margin-left>Valor inválido</p>
+    </form>
+  
+    <div padding>
+      <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Cadastrar</button>
+    </div>
+  </ion-content>
+    

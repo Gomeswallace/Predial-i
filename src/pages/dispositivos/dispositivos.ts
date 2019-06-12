@@ -20,7 +20,6 @@ export class DispositivosPage {
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DispositivosPage');
     this.dispositivoService.findAll()
       .subscribe(response => { //funcao anonima callback sera executada qdo a resposta chegar
         this.dispositivos = response;
