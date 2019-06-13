@@ -10,19 +10,20 @@ import { EquipamentoService } from '../../services/domain/equipamento.service';
 })
 export class EquipamentosPage {
 
-  itens : EquipamentoDTO[];
-
+  equipamentos : EquipamentoDTO[]; 
+  ambiente_id = this.navParams.get('ambie_id'); 
+  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public equipamentoService: EquipamentoService) {
+    public equipamentoService: EquipamentoService) {       
   }
 
   ionViewDidLoad() {
-    let equipamento_id = this.navParams.get('equip_id');
-    this.equipamentoService.findByAmbiente(equipamento_id)
+    
+    this.equipamentoService.findByAmbiente(this.ambiente_id)
             .subscribe(response => {
-              this.itens = response['content'];
+              this.equipamentos = response;
             },
             error => {});
   }

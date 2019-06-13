@@ -29,8 +29,8 @@ export class AmbientesPage {
             error => {});
   }
 
-  showEquipamentos(equipamento_id: string){
-    this.navCtrl.push('EquipamentosPage', {equip_id: equipamento_id});
+  showEquipamentos(ambiente_id: string){
+    this.navCtrl.push('EquipamentosPage', {ambie_id: ambiente_id});
   }
 
   addAmbiente(dispositivo_id: string){

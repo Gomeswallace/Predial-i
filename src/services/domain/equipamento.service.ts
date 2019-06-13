@@ -16,7 +16,7 @@ export class EquipamentoService {
         return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos`);
     }
 
-    findByAmbiente(ambiente_id : string, page : number = 0, linesPerPage : number = 24) {
-        return this.http.get(`${API_CONFIG.baseUrl}/equipamentos/page/?ambiente=${ambiente_id}&page=${page}&linesPerPage=${linesPerPage}`);
+    findByAmbiente(ambiente_id : string) : Observable<EquipamentoDTO[]>{
+        return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos/page/?ambiente=${ambiente_id}`);
       }  
 }
