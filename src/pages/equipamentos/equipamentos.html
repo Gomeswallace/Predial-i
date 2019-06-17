@@ -13,12 +13,13 @@
             <ion-avatar item-start>        
               <img src="img/avatar-cher.png">
             </ion-avatar>
-            <h3><ion-note>Código: {{ ambiente.id }}</ion-note></h3>        
-            <h2>Nome: {{ ambiente.nome }}</h2>
-            <p>Descricao: {{ ambiente.descricao }}</p>
-            <p >
-                <button ion-button clear icon-start color="primary" (click)="showEquipamentos(ambiente.id)">
-                  <ion-icon name='home' ></ion-icon> Equipamentos</button>
+            <h3><ion-note>Código: {{ equipamento.id }}</ion-note></h3>        
+            <h2>Nome: {{ equipamento.nome }}</h2>
+            <p>Tipo: {{ equipamento.tipo }}</p>
+            <p>Ambiente: {{ equipamento.ambienteId }}</p>
+            <p>Porta: {{ equipamento.porta }}</p>
+            <p>Status: {{ equipamento.status }}</p>
+              <p>
                 <button ion-button clear icon-start color="secondary" (click)="editAmbiente(ambiente)">
                     <ion-icon name='create'></ion-icon> Editar</button>
                 <button ion-button clear icon-start color="danger" icon-only (click)="removeAmbiente(ambiente.id)">
@@ -31,105 +32,5 @@
         <button ion-fab>
           <ion-icon name="add"></ion-icon>
         </button>
-      </ion-fab> 
-
-
-
-
-    <ion-list>
-      <button ion-item *ngFor="let item of itens">
-        <ion-thumbnail ion-start>
-          <img [src]="item.imageUrl || 'assets/imgs/sem-imagem.jpg'">      
-        </ion-thumbnail>
-        <h2>{{item.nome}}</h2>
-        <h3>{{item.descricao}}</h3>
-        <h3>{{item.dispositivoId}}</h3>
-      </button>
-    </ion-list>
-
-    <ion-fab bottom right mini (click)="adicionar(item.ambienteId)">
-      <button ion-fab>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
+      </ion-fab>
   </ion-content>
-
-  <ion-header>
-      <ion-navbar>
-        <ion-title>Icon Buttons</ion-title>
-      </ion-navbar>
-    </ion-header>
-    
-    <ion-content padding>
-    
-      <p>
-        <button ion-button color="light" icon-start>
-          <ion-icon name='arrow-back'></ion-icon>
-          Back
-        </button>
-    
-        <button ion-button color="light" icon-only>
-          <ion-icon name='arrow-down'></ion-icon>
-        </button>
-    
-        <button ion-button color="light" icon-only>
-          <ion-icon name='arrow-up'></ion-icon>
-        </button>
-    
-        <button ion-button color="light" icon-end>
-          Next
-          <ion-icon name='arrow-forward'></ion-icon>
-        </button>
-      </p>
-    
-      <p>
-        <button ion-button icon-start>
-          <ion-icon name='home'></ion-icon>
-          Home
-        </button>
-        <button ion-button outline icon-start>
-          <ion-icon name='briefcase' is-active="false"></ion-icon>
-          Work
-        </button>
-        <button ion-button clear icon-start>
-          <ion-icon name='beer' is-active="false"></ion-icon>
-          Pub
-        </button>
-      </p>
-    
-      <p>
-        <button ion-button color="secondary" icon-start>
-          <ion-icon name='people'></ion-icon>
-          Friends
-        </button>
-        <button ion-button color="secondary" outline icon-start>
-          <ion-icon name='paw' is-active="false"></ion-icon>
-          Best Friend
-        </button>
-      </p>
-    
-      <p>
-        <button ion-button color="danger" icon-start>
-          <ion-icon name='close'></ion-icon>
-          Remove
-        </button>
-        <button ion-button color="danger" outline icon-only>
-          <ion-icon name='remove-circle' is-active="false"></ion-icon>
-        </button>
-        <button ion-button color="danger" clear icon-only>
-          <ion-icon name='trash' is-active="false"></ion-icon>
-        </button>
-      </p>
-    
-      <p>
-        <button ion-button color="dark" round icon-start>
-          <ion-icon name='construct' is-active="false"></ion-icon>
-          Tools
-        </button>
-        <button ion-button color="dark" clear icon-only>
-          <ion-icon name='hammer' is-active="false"></ion-icon>
-        </button>
-      </p>
-    
-    </ion-content>
-  
