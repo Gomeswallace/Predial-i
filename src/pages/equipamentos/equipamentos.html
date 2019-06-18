@@ -15,20 +15,20 @@
             </ion-avatar>
             <h3><ion-note>Código: {{ equipamento.id }}</ion-note></h3>        
             <h2>Nome: {{ equipamento.nome }}</h2>
-            <p>Tipo: {{ equipamento.tipo }}</p>
-            <p>Ambiente: {{ equipamento.ambienteId }}</p>
+            <p>Tipo: {{ equipamento.tipo }} - tipo.descricao</p>
+            <p>Ambiente: {{ equipamento.ambienteId }} - ambienteId.descricao</p>
             <p>Porta: {{ equipamento.porta }}</p>
             <p>Status: {{ equipamento.status }}</p>
               <p>
-                <button ion-button clear icon-start color="secondary" (click)="editAmbiente(ambiente)">
+                <button ion-button clear icon-start color="secondary" (click)="editAmbiente(equipamento)">
                     <ion-icon name='create'></ion-icon> Editar</button>
-                <button ion-button clear icon-start color="danger" icon-only (click)="removeAmbiente(ambiente.id)">
+                <button ion-button clear icon-start color="danger" icon-only (click)="removeAmbiente(equipamento.id)">
                   <ion-icon name='trash' ></ion-icon>Excluir</button>        
               </p> 
           </ion-item>
         </ion-list>
     
-      <ion-fab bottom right mini (click)="addAmbiente(ambientes[0].dispositivoId)">
+      <ion-fab bottom right mini (click)="addEquipamento(equipamentos[0].ambienteId)">
         <button ion-fab>
           <ion-icon name="add"></ion-icon>
         </button>

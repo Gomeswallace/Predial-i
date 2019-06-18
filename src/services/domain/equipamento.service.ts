@@ -18,5 +18,17 @@ export class EquipamentoService {
 
     findByAmbiente(ambiente_id : string) : Observable<EquipamentoDTO[]>{
         return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos/page/?ambiente=${ambiente_id}`);
-      }  
+      }
+      
+    insert(equipamento: EquipamentoDTO){   
+        if(equipamento.id){
+            return this.http.put<EquipamentoDTO>(`${API_CONFIG.baseUrl}/equipamentos/${equipamento.id}`, equipamento);
+        }else{
+            return this.http.post(`${API_CONFIG.baseUrl}/equipamentos/`, equipamento);
+        }
+    }
+
+    delete(id: string){
+        return this.http.delete<EquipamentoDTO>(`${API_CONFIG.baseUrl}/equipamentos/${id}`);
+    }  
 }

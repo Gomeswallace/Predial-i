@@ -37,7 +37,7 @@
         <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
       </ion-select>
     </ion-item>
-    <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor
+    <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>
     <!--<ion-item *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" color="danger">
       <div [hidden]="!formGroup.controls.idTipo.errors.required">
         O campo é obrigatório!
