@@ -3,7 +3,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>Equipamentos</ion-title>
+      <ion-title>Equipamentos do Ambiente....</ion-title>
     </ion-navbar>
   </ion-header>
   
@@ -15,14 +15,14 @@
             </ion-avatar>
             <h3><ion-note>Código: {{ equipamento.id }}</ion-note></h3>        
             <h2>Nome: {{ equipamento.nome }}</h2>
-            <p>Tipo: {{ equipamento.tipo }} - tipo.descricao</p>
+            <p>Tipo: {{ equipamento.tipo.id }} - {{ equipamento.tipo.nome }}   </p>
             <p>Ambiente: {{ equipamento.ambienteId }} - ambienteId.descricao</p>
             <p>Porta: {{ equipamento.porta }}</p>
             <p>Status: {{ equipamento.status }}</p>
               <p>
-                <button ion-button clear icon-start color="secondary" (click)="editAmbiente(equipamento)">
+                <button ion-button clear icon-start color="secondary" (click)="editEquipamento(equipamento)">
                     <ion-icon name='create'></ion-icon> Editar</button>
-                <button ion-button clear icon-start color="danger" icon-only (click)="removeAmbiente(equipamento.id)">
+                <button ion-button clear icon-start color="danger" icon-only (click)="removeEquipamento(equipamento.id)">
                   <ion-icon name='trash' ></ion-icon>Excluir</button>        
               </p> 
           </ion-item>

@@ -20,20 +20,19 @@ export class EquipamentosPage {
     public toast: ToastController) {       
   }
 
-  ionViewDidLoad() {
-    
+  ionViewDidLoad() {    
     this.equipamentoService.findByAmbiente(this.ambiente_id)
-            .subscribe(response => {
-              this.equipamentos = response;
-            },
-            error => {});
+        .subscribe(response => {
+          this.equipamentos = response;
+        },
+        error => {});
   }
 
-  addEquipamento(equipamento_id: string){
-    this.navCtrl.push('EquipamentoInserirPage', {equip_id: equipamento_id});
+  addEquipamento(ambiente_id: string){
+    this.navCtrl.push('EquipamentoInserirPage', {amb_id: ambiente_id});
   }
 
-  editAmbiente(equip : EquipamentoDTO ){
+  editEquipamento(equip : EquipamentoDTO ){
     this.navCtrl.push('EquipamentoInserirPage', {equipamento : equip});
   }
   

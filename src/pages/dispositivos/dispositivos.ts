@@ -27,8 +27,8 @@ export class DispositivosPage {
       error => {});
   }
 
-  showAmbientes(dispositivo_id: string){
-    this.navCtrl.push('AmbientesPage', {disp_id: dispositivo_id});
+  showAmbientes(disp_id: string){
+    this.navCtrl.push('AmbientesPage', {dispositivo_id: disp_id});
   }
 
   addDispositivo(){

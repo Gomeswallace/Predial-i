@@ -28,7 +28,6 @@ export class EquipamentoInserirPage {
       public toast: ToastController) {
     
         this.formGroup = this.formBuilder.group({});
-
         this.equipamento = this.navParams.data.equipamento || {};
         this.setupPageTitle();
         this.createFrom();
@@ -41,10 +40,10 @@ export class EquipamentoInserirPage {
       this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
     },
     error => {});
-}
+  }
 
   private setupPageTitle(){
-    this.title = this.navParams.data.dispositivo ? 'Alterando Equipamento' : 'Novo Equipamento';
+    this.title = this.navParams.data.equipamento ? 'Alterando Equipamento' : 'Novo Equipamento';
   }
   
   createFrom(){
@@ -57,5 +56,35 @@ export class EquipamentoInserirPage {
       status: [this.equipamento.status, [Validators.required]],
       ambienteId: [this.equipamento.ambienteId, [Validators.required]]
     });
+  }
+
+  onSubmit(){
+    if(this.formGroup.valid){
+      this.equipamentoService.insert(this.formGroup.value)
+      .subscribe(response => {
+        this.showInsertOk();
+        //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
+        this.navCtrl.setRoot('DispositivosPage');
+      },
+      error => {(e) => {
+        this.toast.create({ message : 'Erro ao salvar Equipamento', duration: 3000 }).present();
+        console.error(e);
+      }});
+    }
+  }
+  
+  showInsertOk(){
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Equipamento cadastrado com sucesso.',
+      enableBackdropDismiss: false,
+      buttons:[
+        {
+          text: 'OK'
+          //handler : () => { this.navCtrl.setRoot('AmbientesPage'); }
+        }
+      ]
+    });
+    alert.present();
   }
 }

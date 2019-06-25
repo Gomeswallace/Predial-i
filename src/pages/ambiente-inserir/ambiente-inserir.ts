@@ -14,6 +14,7 @@ export class AmbienteInserirPage {
   title: string;
   formGroup: FormGroup;
   ambiente: AmbienteDTO;
+  ehAlteracao: boolean;
 
   constructor(public navCtrl: NavController, 
       public navParams: NavParams,
@@ -22,23 +23,17 @@ export class AmbienteInserirPage {
       public alertCtrl: AlertController,
       public toast: ToastController) {
         this.formGroup = this.formBuilder.group({});
-
+        this.ehAlteracao = this.navParams.data.ambiente ? true : false; 
         this.ambiente = this.navParams.data.ambiente || {};
         this.setupPageTitle();
         this.createFrom();
       }
 
 ionViewDidLoad() {
-//    this.dispositivoTipoService.findAll()
-//    .subscribe(response => {
-//      this.tipos = response;
-//      this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
-//    },
-//    error => {});
 }  
 
-private setupPageTitle(){
-  this.title = this.navParams.data.ambiente ? 'Alterando Ambiente' : 'Novo Ambiente';
+private setupPageTitle(){  
+    this.title = this.ehAlteracao ? 'Alterando Ambiente' : 'Novo Ambiente';
 }
 
 createFrom(){
@@ -46,7 +41,7 @@ createFrom(){
     id: [this.ambiente.id],
     nome: [this.ambiente.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
     descricao: [this.ambiente.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-    dispositivoId: [this.ambiente.dispositivoId, [Validators.required]]
+    dispositivoId: [this.navParams.data.disp_id]
   });
 }
 
@@ -56,10 +51,10 @@ onSubmit(){
     .subscribe(response => {
       this.showInsertOk();
       //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
-      this.navCtrl.setRoot('AmbientesPage');
+      this.navCtrl.setRoot('DispositivosPage');
     },
     error => {(e) => {
-      this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 3000 }).present();
+      this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 4000 }).present();
       console.error(e);
     }});
   }
@@ -68,7 +63,7 @@ onSubmit(){
 showInsertOk(){
   let alert = this.alertCtrl.create({
     title: 'Sucesso!',
-    message: 'Ambiente cadastrado com sucesso.',
+    message: this.ehAlteracao ? 'Ambiente alterado com sucesso.' : 'Ambiente cadastrado com sucesso.',
     enableBackdropDismiss: false,
     buttons:[
       {

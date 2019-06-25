@@ -12,6 +12,7 @@ import { AmbienteDTO } from '../../models/ambiente.dto';
 export class AmbientesPage {
 
   ambientes: AmbienteDTO[];
+  dispositivo_id = this.navParams.get('dispositivo_id');
 
   constructor(
     public navCtrl: NavController, 
@@ -21,8 +22,7 @@ export class AmbientesPage {
   }
 
   ionViewDidLoad() {
-    let dispositivo_id = this.navParams.get('disp_id');
-    this.ambienteService.findByDispositivo(dispositivo_id)
+    this.ambienteService.findByDispositivo(this.dispositivo_id)
             .subscribe(response => {          
               this.ambientes = response;
             },
@@ -33,21 +33,21 @@ export class AmbientesPage {
     this.navCtrl.push('EquipamentosPage', {ambie_id: ambiente_id});
   }
 
-  addAmbiente(dispositivo_id: string){
-    this.navCtrl.push('AmbienteInserirPage', {disp_id: dispositivo_id});
+  addAmbiente(){
+    this.navCtrl.push('AmbienteInserirPage', {disp_id: this.dispositivo_id});
   }
 
   editAmbiente(ambie : AmbienteDTO ){
-    this.navCtrl.push('AmbienteInserirPage', {ambiente : ambie});
+    this.navCtrl.push('AmbienteInserirPage', {ambiente : ambie, disp_id: this.dispositivo_id});
   }
   
-  removeAmbiente(id : string){
-    this.ambienteService.delete(id)
+  removeAmbiente(ambiente_id : string){
+    this.ambienteService.delete(ambiente_id)
     .subscribe(response => {
-      this.toast.create({ message : 'Ambiente removido com sucesso!', duration: 3000 }).present();
-      this.navCtrl.setRoot('AmbientesPage');},
+      this.toast.create({ message : 'Ambiente removido com sucesso!', duration: 4000 }).present();
+      this.navCtrl.setRoot('DispositivosPage');},
       error => {(e) => {
-        this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 3000 }).present();
+        this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 4000 }).present();
         console.error(e);
       }});
   }  

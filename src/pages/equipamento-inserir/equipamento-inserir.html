@@ -29,11 +29,9 @@
 
       <ion-item>
         <ion-label stacked>Porta*</ion-label>
-        <ion-select formControlName="porta">
-          <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
-        </ion-select>
+        <ion-input type="text" formControlName="porta"></ion-input>
       </ion-item>
-      <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>
+      <p class="danger" *ngIf="!formGroup.controls.porta.valid && (formGroup.controls.porta.dirty || formGroup.controls.porta.touched)" margin-left>Valor Inválido</p>
 
       <ion-item>
         <ion-label stacked>Tipo Equipamento*</ion-label>
@@ -41,10 +39,9 @@
           <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
         </ion-select>
       </ion-item>
-      <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>
-    </form>
-  
-    <div padding>
+      <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>    
+  </form>
+  <div padding>
       <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Cadastrar</button>
     </div>
   </ion-content>
