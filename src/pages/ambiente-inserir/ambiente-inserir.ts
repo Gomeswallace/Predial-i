@@ -51,7 +51,7 @@ onSubmit(){
     .subscribe(response => {
       this.showInsertOk();
       //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
-      this.navCtrl.setRoot('DispositivosPage');
+      //this.navCtrl.setRoot('DispositivosPage');
     },
     error => {(e) => {
       this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 4000 }).present();
@@ -67,12 +67,11 @@ showInsertOk(){
     enableBackdropDismiss: false,
     buttons:[
       {
-        text: 'OK'
-        //handler : () => { this.navCtrl.setRoot('AmbientesPage'); }
-      }
-    ]
-  });
-  alert.present();
-}
+        text: 'OK',
+        handler : () => { this.navCtrl.setRoot('DispositivosPage'); }
+      }]
+    });
+    alert.present();
+  }
 
 }

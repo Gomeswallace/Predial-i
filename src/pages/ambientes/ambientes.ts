@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { AmbienteService } from '../../services/domain/ambiente.service';
 import { AmbienteDTO } from '../../models/ambiente.dto';
 
@@ -18,6 +18,7 @@ export class AmbientesPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public ambienteService: AmbienteService,
+    public alertCtrl: AlertController,
     public toast: ToastController) {
   }
 
@@ -44,12 +45,27 @@ export class AmbientesPage {
   removeAmbiente(ambiente_id : string){
     this.ambienteService.delete(ambiente_id)
     .subscribe(response => {
-      this.toast.create({ message : 'Ambiente removido com sucesso!', duration: 4000 }).present();
-      this.navCtrl.setRoot('DispositivosPage');},
+      this.showDeleteOk();
+      //this.toast.create({ message : 'Ambiente removido com sucesso!', duration: 4000 }).present();
+      //this.navCtrl.setRoot('DispositivosPage');
+    },
       error => {(e) => {
         this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 4000 }).present();
         console.error(e);
       }});
-  }  
+  }
+  
+  showDeleteOk(){
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Ambiente removido.',
+      enableBackdropDismiss: false,
+      buttons:[
+        {
+          text: 'OK',
+          handler : () => { this.navCtrl.setRoot('DispositivosPage'); }
+        }]
+      });
+      alert.present();
+    }
 }
-

@@ -31,13 +31,15 @@
       </div>  
     </ion-item>
   -->
-    <ion-item>
+  <div *ngIf="novoDispositivo">
+    <ion-item >
       <ion-label stacked>Tipo Dispositivo*</ion-label>
       <ion-select formControlName="idTipo">
         <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
       </ion-select>
     </ion-item>
     <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>
+  </div>
     <!--<ion-item *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" color="danger">
       <div [hidden]="!formGroup.controls.idTipo.errors.required">
         O campo é obrigatório!
@@ -46,7 +48,7 @@
   -->
   </form>
   <div padding>
-    <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Cadastrar</button>
+    <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Salvar</button>
   </div>
   </ion-content>
   

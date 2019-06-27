@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { DispositivoService } from '../../services/domain/dispositivo.service';
 import { DispositivoDTO } from '../../models/dispositivo.dto';
 
@@ -16,6 +16,7 @@ export class DispositivosPage {
       public navCtrl: NavController, 
       public navParams: NavParams,
       public dispositivoService: DispositivoService,
+      public alertCtrl: AlertController,
       public toast: ToastController) {
     }
 
@@ -42,12 +43,27 @@ export class DispositivosPage {
   removeDispositivo(id : string){
     this.dispositivoService.delete(id)
     .subscribe(response => {
-      this.toast.create({ message : 'Dispositivo removido com sucesso!', duration: 3000 }).present();
-      this.navCtrl.setRoot('DispositivosPage');},
+      this.showDeleteOk();
+      //this.toast.create({ message : 'Dispositivo removido com sucesso!', duration: 3000 }).present();
+      //this.navCtrl.setRoot('DispositivosPage');
+    },
       error => {(e) => {
         this.toast.create({ message : 'Erro ao salvar Dispositivo', duration: 3000 }).present();
         console.error(e);
       }});
   }
-  
+
+  showDeleteOk(){
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Dispositivo removido com sucesso.',
+      enableBackdropDismiss: false,
+      buttons:[
+        {
+          text: 'OK',
+          handler : () => { this.navCtrl.setRoot('DispositivosPage'); }
+        }]
+      });
+      alert.present();
+    }
 }

@@ -16,4 +16,9 @@ export class DispositivoTipoService {
         //a crase permite utilizar variavel sem precisar concatenar com string
         return this.http.get<DispositivoTipoDTO[]>(`${API_CONFIG.baseUrl}/tiposdispositivos`);
     }
+
+    find(id: string) : Observable<DispositivoTipoDTO>  {
+        //a crase permite utilizar variavel sem precisar concatenar com string
+        return this.http.get<DispositivoTipoDTO>(`${API_CONFIG.baseUrl}/tiposdispositivos/${id}`);
+    }
 }

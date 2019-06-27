@@ -17,7 +17,9 @@ export class DispositivoInserirPage {
   title: string;
   formGroup: FormGroup;
   dispositivo: DispositivoDTO;
+  //tipo: DispositivoTipoDTO;
   tipos: DispositivoTipoDTO[];
+  novoDispositivo: boolean;
 
   constructor(
       public navCtrl: NavController, 
@@ -28,23 +30,33 @@ export class DispositivoInserirPage {
       public alertCtrl: AlertController,
       public toast: ToastController) {
         this.formGroup = this.formBuilder.group({});
-
+        this.novoDispositivo = this.navParams.data.dispositivo ? false : true; 
         this.dispositivo = this.navParams.data.dispositivo || {};
         this.setupPageTitle();
         this.createFrom();
       }
 
-ionViewDidLoad() {
+ionViewDidLoad() { 
+  /*if (this.ehAlteracao) {
+   let idTipo = this.dispositivo.dispositivoTipo.id; 
+   this.dispositivoTipoService.find(idTipo)
+    .subscribe(response => {
+      this.tipo = response;
+      this.formGroup.controls.idTipo.setValue(this.tipo);
+    },
+    error => {}); 
+  } else */{
     this.dispositivoTipoService.findAll()
     .subscribe(response => {
-      this.tipos = response;
-      this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
-    },
+        this.tipos = response;
+        this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
+    },    
     error => {});
+  }    
 }  
 
 private setupPageTitle(){
-  this.title = this.navParams.data.dispositivo ? 'Alterando Dispositivo' : 'Novo Dispositivo';
+  this.title = this.novoDispositivo ? 'Novo Dispositivo' : 'Alterando Dispositivo';
 }
 
 createFrom(){
@@ -52,7 +64,7 @@ createFrom(){
     id: [this.dispositivo.id],
     nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
     descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-    idTipo: [this.dispositivo.idTipo, [Validators.required]]
+    idTipo: [this.dispositivo.dispositivoTipo.id, [Validators.required]]
   });
 }
 
@@ -62,10 +74,10 @@ onSubmit(){
     .subscribe(response => {
       this.showInsertOk();
       //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
-      this.navCtrl.setRoot('DispositivosPage');
+      //this.navCtrl.setRoot('DispositivosPage');
     },
     error => {(e) => {
-      this.toast.create({ message : 'Erro ao salvar Dispositivo', duration: 3000 }).present();
+      this.toast.create({ message : 'Erro ao salvar Dispositivo', duration: 4000 }).present();
       console.error(e);
     }});
   }
@@ -74,16 +86,14 @@ onSubmit(){
 showInsertOk(){
   let alert = this.alertCtrl.create({
     title: 'Sucesso!',
-    message: 'Dispositivo cadastrado com sucesso.',
+    message: this.novoDispositivo ? 'Dispositivo cadastrado com sucesso.' : 'Dispositivo alterado com sucesso.',
     enableBackdropDismiss: false,
     buttons:[
       {
         text: 'OK',
         handler : () => { this.navCtrl.setRoot('DispositivosPage'); }
-      }
-    ]
-  });
-  alert.present();
-}
-
+      }]
+    });
+    alert.present();
+  }
 }
