@@ -56,7 +56,7 @@ export class DispositivosPage {
   showDeleteOk(){
     let alert = this.alertCtrl.create({
       title: 'Sucesso!',
-      message: 'Dispositivo removido com sucesso.',
+      message: 'Dispositivo removido.',
       enableBackdropDismiss: false,
       buttons:[
         {

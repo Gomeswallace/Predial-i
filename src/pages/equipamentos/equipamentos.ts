@@ -17,7 +17,7 @@ export class EquipamentosPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public equipamentoService: EquipamentoService,
-    public toast: ToastController) {       
+    public toast: ToastController) {
   }
 
   ionViewDidLoad() {    
@@ -46,5 +46,4 @@ export class EquipamentosPage {
         console.error(e);
       }});
   }
-
 }

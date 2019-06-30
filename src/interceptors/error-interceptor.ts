@@ -83,7 +83,18 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     handle403(){
-        this.storage.setLocalUser(null);
+        //this.storage.setLocalUser(null);
+        let alert = this.alertCtrl.create({
+            title: 'Erro 403: falha de permissão',
+            message: 'Verifique a ação desejada!',
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'OK',
+                }
+            ]
+        });
+        alert.present();
     }
 
     handle422(errorObj){

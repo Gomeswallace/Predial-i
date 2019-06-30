@@ -16,40 +16,21 @@
             <h3><ion-note>Código: {{ ambiente.id }}</ion-note></h3>        
             <h2>Nome: {{ ambiente.nome }}</h2>
             <p>Descricao: {{ ambiente.descricao }}</p>
-            <p >
-                <button ion-button clear icon-start color="primary" (click)="showEquipamentos(ambiente.id)">
-                  <ion-icon name='home' ></ion-icon> Equipamentos</button>
-                <button ion-button clear icon-start color="secondary" (click)="editAmbiente(ambiente)">
-                    <ion-icon name='create'></ion-icon> Editar</button>
-                <button ion-button clear icon-start color="danger" icon-only (click)="removeAmbiente(ambiente.id)">
-                  <ion-icon name='trash' ></ion-icon>Excluir</button>        
-              </p> 
+            <p> 
+              <button ion-button clear icon-start color="primary" (click)="showEquipamentos(ambiente.id)">
+                <ion-icon name='home' ></ion-icon> Equipamentos</button>
+            </p>
+            <p>
+              <button ion-button clear icon-start color="secondary" (click)="editAmbiente(ambiente)">
+                  <ion-icon name='create'></ion-icon> Editar</button>
+            </p>
+            <p>
+              <button ion-button clear icon-start color="danger" icon-only (click)="removeAmbiente(ambiente.id)">
+                <ion-icon name='trash' ></ion-icon>Excluir</button>        
+            </p> 
           </ion-item>
         </ion-list>
-<!--
-    <ion-list>
-        <ion-item-sliding *ngFor="let ambiente of ambientes">      
-          <ion-item>
-              <h2>{{ambiente.id}}</h2>
-              <p>{{ambiente.nome}}</p>
-              <p>{{ambiente.descricao}}</p>
-              <p>{{ambiente.dispositivoId}}</p>
-          </ion-item> 
-    
-          <ion-item-options side="end"  (ionSwipe)="showEquipamentos(ambiente.id)">
-              <button ion-button color="primary" (click)="showEquipamentos(ambiente.id)">
-                  <ion-icon slot="top" name="archive"></ion-icon>
-                Mais</button>
-            <button ion-button color="secondary" (click)="editAmbiente(ambiente)">
-              <ion-icon slot="top" name="create"></ion-icon>
-            Editar</button>
-            <button ion-button color="danger" (click)="removeAmbiente(ambiente.id)">
-              <ion-icon slot="top" name="trash"></ion-icon>
-            Excluir</button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    -->
+        
       <ion-fab bottom right mini (click)="addAmbiente()">
         <button ion-fab>
           <ion-icon name="add"></ion-icon>
