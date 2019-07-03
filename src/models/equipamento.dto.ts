@@ -3,7 +3,7 @@ export interface EquipamentoDTO{
     nome: string;
     porta: string;
     status: string;
-    idTipo: string;    
+    tipo: string;    
     ambienteId: string;
   }
   

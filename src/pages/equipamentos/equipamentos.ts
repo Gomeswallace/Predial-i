@@ -29,13 +29,13 @@ export class EquipamentosPage {
   }
 
   addEquipamento(ambiente_id: string){
-    this.navCtrl.push('EquipamentoInserirPage', {amb_id: ambiente_id});
+    this.navCtrl.push('EquipamentoInserirPage', {amb_id: this.ambiente_id});
   }
 
   editEquipamento(equip : EquipamentoDTO ){
-    this.navCtrl.push('EquipamentoInserirPage', {equipamento : equip});
+    this.navCtrl.push('EquipamentoInserirPage', {equipamento : equip, amb_id: this.ambiente_id});
   }
-  
+
   removeEquipamento(id : string){
     this.equipamentoService.delete(id)
     .subscribe(response => {

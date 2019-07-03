@@ -17,9 +17,8 @@ export class DispositivoInserirPage {
   title: string;
   formGroup: FormGroup;
   dispositivo: DispositivoDTO;
-  //tipo: DispositivoTipoDTO;
   tipos: DispositivoTipoDTO[];
-  novoDispositivo: boolean;
+  novoDispositivo: boolean = false;
 
   constructor(
       public navCtrl: NavController, 
@@ -37,22 +36,12 @@ export class DispositivoInserirPage {
       }
 
 ionViewDidLoad() { 
-  /*if (this.ehAlteracao) {
-   let idTipo = this.dispositivo.dispositivoTipo.id; 
-   this.dispositivoTipoService.find(idTipo)
-    .subscribe(response => {
-      this.tipo = response;
-      this.formGroup.controls.idTipo.setValue(this.tipo);
-    },
-    error => {}); 
-  } else */{
     this.dispositivoTipoService.findAll()
     .subscribe(response => {
         this.tipos = response;
         this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
     },    
     error => {});
-  }    
 }  
 
 private setupPageTitle(){
@@ -64,7 +53,7 @@ createFrom(){
     id: [this.dispositivo.id],
     nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
     descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-    idTipo: [this.dispositivo.dispositivoTipo.id, [Validators.required]]
+    idTipo: [this.dispositivo.dispositivoTipo, [Validators.required]]
   });
 }
 
@@ -86,7 +75,7 @@ onSubmit(){
 showInsertOk(){
   let alert = this.alertCtrl.create({
     title: 'Sucesso!',
-    message: this.novoDispositivo ? 'Dispositivo cadastrado com sucesso.' : 'Dispositivo alterado com sucesso.',
+    message: this.novoDispositivo ? 'Dispositivo cadastrado com sucesso.' : 'Dispositivo alterado.',
     enableBackdropDismiss: false,
     buttons:[
       {

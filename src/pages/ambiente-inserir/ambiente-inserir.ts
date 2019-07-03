@@ -50,8 +50,6 @@ onSubmit(){
     this.ambienteService.insert(this.formGroup.value)
     .subscribe(response => {
       this.showInsertOk();
-      //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
-      //this.navCtrl.setRoot('DispositivosPage');
     },
     error => {(e) => {
       this.toast.create({ message : 'Erro ao salvar Ambiente', duration: 4000 }).present();

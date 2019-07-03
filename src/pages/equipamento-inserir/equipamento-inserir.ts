@@ -17,6 +17,9 @@ export class EquipamentoInserirPage {
   formGroup: FormGroup;
   equipamento: EquipamentoDTO;
   tipos: EquipamentoTipoDTO[];
+  tipoEquipamento:  EquipamentoTipoDTO;
+  novoEquipamento: boolean = false;
+  status: boolean = true;
 
   constructor(
       public navCtrl: NavController,               
@@ -26,45 +29,47 @@ export class EquipamentoInserirPage {
       public equipamentoService: EquipamentoService,
       public alertCtrl: AlertController,
       public toast: ToastController) {
-    
         this.formGroup = this.formBuilder.group({});
+        this.novoEquipamento = this.navParams.data.equipamento ? false : true;  
         this.equipamento = this.navParams.data.equipamento || {};
         this.setupPageTitle();
-        this.createFrom();
+        this.createFrom();        
   }
 
   ionViewDidLoad() {
     this.equipamentoTipoService.findAll()
-    .subscribe(response => {
-      this.tipos = response;
-      this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
-    },
-    error => {});
+      .subscribe(response => {
+        this.tipos = response;
+        this.formGroup.controls.tipo.setValue(this.tipos[0].id);
+      },
+      error => {});
   }
 
   private setupPageTitle(){
-    this.title = this.navParams.data.equipamento ? 'Alterando Equipamento' : 'Novo Equipamento';
+    this.title = this.novoEquipamento ? 'Novo Equipamento' : 'Alterando Equipamento';
   }
   
   createFrom(){
     this.formGroup = this.formBuilder.group({
       id: [this.equipamento.id],
       nome: [this.equipamento.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      //descricao: [this.equipamento.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      idTipo: [this.equipamento.idTipo, [Validators.required]],
-      porta: [this.equipamento.porta, [Validators.required]],
-      status: [this.equipamento.status, [Validators.required]],
-      ambienteId: [this.equipamento.ambienteId, [Validators.required]]
-    });
+      porta: [this.equipamento.porta, [Validators.required]],      
+      status: [this.equipamento.status], 
+      tipo: [this.equipamento.tipo, [Validators.required]],
+      ambienteId: [this.navParams.data.amb_id]
+    }); 
+  }
+
+  updateStatus(){    
+    this.status = !this.status;
+    console.log("valor status....  " + this.status)
   }
 
   onSubmit(){
-    if(this.formGroup.valid){
+    if(this.formGroup.valid){          
       this.equipamentoService.insert(this.formGroup.value)
       .subscribe(response => {
-        this.showInsertOk();
-        //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
-        this.navCtrl.setRoot('DispositivosPage');
+        this.showInsertOk();      
       },
       error => {(e) => {
         this.toast.create({ message : 'Erro ao salvar Equipamento', duration: 3000 }).present();
@@ -76,12 +81,12 @@ export class EquipamentoInserirPage {
   showInsertOk(){
     let alert = this.alertCtrl.create({
       title: 'Sucesso!',
-      message: 'Equipamento cadastrado com sucesso.',
+      message: this.novoEquipamento ? 'Equipamento cadastrado com sucesso.' : 'Equipamento alterado.',
       enableBackdropDismiss: false,
       buttons:[
         {
-          text: 'OK'
-          //handler : () => { this.navCtrl.setRoot('AmbientesPage'); }
+          text: 'OK',
+          handler : () => { this.navCtrl.setRoot('DispositivosPage'); }
         }
       ]
     });

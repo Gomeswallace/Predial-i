@@ -11,21 +11,10 @@
 <ion-content padding>
     <form [formGroup]="formGroup">
       <ion-item>
-        <ion-label stacked>Nome do equipamento</ion-label>
+        <ion-label stacked>Nome do equipamento*</ion-label>
         <ion-input type="text" formControlName="nome"></ion-input>
       </ion-item>
       <p class="danger" *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" margin-left>Valor inválido</p>
-  
-    <!--  <ion-item>
-        <ion-label stacked>Descrição</ion-label>
-        <ion-input type="text" formControlName="descricao"></ion-input>
-      </ion-item>
-      <p class="danger" *ngIf="!formGroup.controls.descricao.valid && (formGroup.controls.descricao.dirty || formGroup.controls.descricao.touched)" margin-left>Valor inválido</p>
-    -->  
-      <ion-item>
-        <ion-label>Status</ion-label>
-        <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
-      </ion-item>
 
       <ion-item>
         <ion-label stacked>Porta*</ion-label>
@@ -33,15 +22,23 @@
       </ion-item>
       <p class="danger" *ngIf="!formGroup.controls.porta.valid && (formGroup.controls.porta.dirty || formGroup.controls.porta.touched)" margin-left>Valor Inválido</p>
 
+    <div *ngIf="novoEquipamento">
       <ion-item>
         <ion-label stacked>Tipo Equipamento*</ion-label>
-        <ion-select formControlName="idTipo">
+        <ion-select formControlName="tipo">
           <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
         </ion-select>
       </ion-item>
-      <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>    
+      <p class="danger" *ngIf="!formGroup.controls.tipo.valid && (formGroup.controls.tipo.dirty || formGroup.controls.tipo.touched)" margin-left>Valor Inválido</p>    
+    </div>
+    
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-toggle input type="checkbox" color="secondary" [checked]="true" (ionChange)="updateStatus()"></ion-toggle>        
+    </ion-item>
+
   </form>
   <div padding>
-      <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Salvar</button>
-    </div>
+    <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Salvar</button>
+  </div>
   </ion-content>
