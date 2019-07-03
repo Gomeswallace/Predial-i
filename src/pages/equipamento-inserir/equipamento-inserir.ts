@@ -19,7 +19,7 @@ export class EquipamentoInserirPage {
   tipos: EquipamentoTipoDTO[];
   tipoEquipamento:  EquipamentoTipoDTO;
   novoEquipamento: boolean = false;
-  status: boolean = true;
+  status: boolean;
 
   constructor(
       public navCtrl: NavController,               
@@ -31,9 +31,9 @@ export class EquipamentoInserirPage {
       public toast: ToastController) {
         this.formGroup = this.formBuilder.group({});
         this.novoEquipamento = this.navParams.data.equipamento ? false : true;  
-        this.equipamento = this.navParams.data.equipamento || {};
+        this.equipamento = this.navParams.data.equipamento || {};        
         this.setupPageTitle();
-        this.createFrom();        
+        this.createFrom();
   }
 
   ionViewDidLoad() {
@@ -49,7 +49,7 @@ export class EquipamentoInserirPage {
     this.title = this.novoEquipamento ? 'Novo Equipamento' : 'Alterando Equipamento';
   }
   
-  createFrom(){
+  createFrom(){    
     this.formGroup = this.formBuilder.group({
       id: [this.equipamento.id],
       nome: [this.equipamento.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -57,16 +57,14 @@ export class EquipamentoInserirPage {
       status: [this.equipamento.status], 
       tipo: [this.equipamento.tipo, [Validators.required]],
       ambienteId: [this.navParams.data.amb_id]
-    }); 
+    });     
   }
 
-  updateStatus(){    
-    this.status = !this.status;
-    console.log("valor status....  " + this.status)
-  }
+  //updateStatus(){  
+  //  this.status = this.equipamento.status == "false" ? false : true;      }
 
   onSubmit(){
-    if(this.formGroup.valid){          
+    if(this.formGroup.valid){
       this.equipamentoService.insert(this.formGroup.value)
       .subscribe(response => {
         this.showInsertOk();      

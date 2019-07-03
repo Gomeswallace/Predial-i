@@ -31,13 +31,16 @@
       </ion-item>
       <p class="danger" *ngIf="!formGroup.controls.tipo.valid && (formGroup.controls.tipo.dirty || formGroup.controls.tipo.touched)" margin-left>Valor Inválido</p>    
     </div>
-    
-    <ion-item>
-      <ion-label>Status</ion-label>
-      <ion-toggle input type="checkbox" color="secondary" [checked]="true" (ionChange)="updateStatus()"></ion-toggle>        
-    </ion-item>
-
+    <div>
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-toggle formControlName="status" color="secondary" [(ngModel)]="status"></ion-toggle>        
+      </ion-item>
+      {{status}}
+  </div>
   </form>
+  
+  
   <div padding>
     <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Salvar</button>
   </div>
