@@ -11,37 +11,35 @@
 <ion-content padding>
     <form [formGroup]="formGroup">
       <ion-item>
-        <ion-label stacked>Nome do equipamento*</ion-label>
+        <ion-label stacked>Nome do equipamento *</ion-label>
         <ion-input type="text" formControlName="nome"></ion-input>
       </ion-item>
       <p class="danger" *ngIf="!formGroup.controls.nome.valid && (formGroup.controls.nome.dirty || formGroup.controls.nome.touched)" margin-left>Valor inválido</p>
+      
+    <ion-item>
+      <ion-label stacked>Portas Digitais *</ion-label>
+      <ion-select formControlName="porta">
+        <ion-option *ngFor="let porta of portas; first as f" [value]="porta" [selected]="f">{{porta}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <p class="danger" *ngIf="!formGroup.controls.porta.valid && (formGroup.controls.porta.dirty || formGroup.controls.porta.touched)" margin-left>Valor Inválido</p>    
 
-      <ion-item>
-        <ion-label stacked>Porta*</ion-label>
-        <ion-input type="text" formControlName="porta"></ion-input>
-      </ion-item>
-      <p class="danger" *ngIf="!formGroup.controls.porta.valid && (formGroup.controls.porta.dirty || formGroup.controls.porta.touched)" margin-left>Valor Inválido</p>
-
-    <div *ngIf="novoEquipamento">
-      <ion-item>
-        <ion-label stacked>Tipo Equipamento*</ion-label>
+    <ion-item>
+      <ion-label stacked>Tipo Equipamento *</ion-label>
         <ion-select formControlName="tipo">
           <ion-option *ngFor="let tipo of tipos; first as f" [value]="tipo.id" [selected]="f">{{tipo.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <p class="danger" *ngIf="!formGroup.controls.tipo.valid && (formGroup.controls.tipo.dirty || formGroup.controls.tipo.touched)" margin-left>Valor Inválido</p>    
-    </div>
-    <div>
-      <ion-item>
-        <ion-label>Status</ion-label>
-        <ion-toggle formControlName="status" color="secondary" [(ngModel)]="status"></ion-toggle>        
-      </ion-item>
-      {{status}}
+      </ion-select>
+    </ion-item>
+    <p class="danger" *ngIf="!formGroup.controls.tipo.valid && (formGroup.controls.tipo.dirty || formGroup.controls.tipo.touched)" margin-left>Valor Inválido</p>
+
+  <div>
+    <ion-item>
+      <ion-label stacked>Status</ion-label>
+      <ion-toggle formControlName="status" color="secondary" [(ngModel)]="status"></ion-toggle>        
+    </ion-item>
   </div>
-  </form>
-  
-  
+</form>  
   <div padding>
     <button ion-button block type="submit" (click)="onSubmit()" [disabled]="formGroup.invalid">Salvar</button>
   </div>
-  </ion-content>
+</ion-content>

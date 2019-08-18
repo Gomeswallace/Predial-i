@@ -13,13 +13,18 @@ import { EquipamentoTipoDTO } from '../../models/equipamentoTipo.dto';
 })
 export class EquipamentoInserirPage {
 
+  ambiente_id = this.navParams.data.amb_id;
   title: string;
   formGroup: FormGroup;
   equipamento: EquipamentoDTO;
+  portas: Array<any> = new Array; 
+  porta: string;
   tipos: EquipamentoTipoDTO[];
-  tipoEquipamento:  EquipamentoTipoDTO;
+  //tipoEquipamento:  EquipamentoTipoDTO;
   novoEquipamento: boolean = false;
   status: boolean;
+  porta_equip: string;
+  id_tipo: string;
 
   constructor(
       public navCtrl: NavController,               
@@ -31,18 +36,15 @@ export class EquipamentoInserirPage {
       public toast: ToastController) {
         this.formGroup = this.formBuilder.group({});
         this.novoEquipamento = this.navParams.data.equipamento ? false : true;  
-        this.equipamento = this.navParams.data.equipamento || {};        
+        this.equipamento = this.navParams.data.equipamento || {};
+        //this.id_tipo = this.navParams.data.equipamento.tipo || {};
         this.setupPageTitle();
         this.createFrom();
   }
 
   ionViewDidLoad() {
-    this.equipamentoTipoService.findAll()
-      .subscribe(response => {
-        this.tipos = response;
-        this.formGroup.controls.tipo.setValue(this.tipos[0].id);
-      },
-      error => {});
+    this.findTipoEquipamento();
+    this.findPortas();
   }
 
   private setupPageTitle(){
@@ -56,8 +58,36 @@ export class EquipamentoInserirPage {
       porta: [this.equipamento.porta, [Validators.required]],      
       status: [this.equipamento.status], 
       tipo: [this.equipamento.tipo, [Validators.required]],
-      ambienteId: [this.navParams.data.amb_id]
+      ambienteId: [this.ambiente_id]
     });     
+  }
+
+  findTipoEquipamento(){
+    this.equipamentoTipoService.findAll()
+      .subscribe(response => {
+        this.tipos = response;
+        if(this.novoEquipamento){
+          this.formGroup.controls.tipo.setValue(this.tipos[0].id);
+        }else{
+          this.formGroup.controls.tipo.setValue(this.equipamento.tipo.id.toString());
+        }
+        
+      },
+      error => {});
+  }
+
+  findPortas(){
+    this.porta_equip = this.equipamento.porta == null ? Number(0).toString() : this.equipamento.porta;
+    this.equipamentoService.findPortas(this.ambiente_id, this.porta_equip)
+      .subscribe(response => {
+        this.portas = response;
+        if(this.novoEquipamento){
+          this.formGroup.controls.porta.setValue(this.portas[0]);          
+        }else{        
+          this.formGroup.controls.porta.setValue(this.equipamento.porta.toString());
+        }        
+      },
+      error => {});  
   }
 
   //updateStatus(){  

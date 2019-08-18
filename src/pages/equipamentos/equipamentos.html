@@ -15,7 +15,7 @@
             <h2>Nome: {{ equipamento.nome }}</h2>
             <h2>Tipo: {{ equipamento.tipo.id }} - {{ equipamento.tipo.nome }}</h2>
             <p>Porta: {{ equipamento.porta }}</p>
-            <p>Status: {{ equipamento.status ? "Ativado" : "Desativado" }} </p>  
+            <p>Status: {{ equipamento.status ? "Ativado" : "Desativado" }} </p>
           </ion-item> 
           <ion-item-options side="end" >            
             <button ion-button color="secondary" (click)="editEquipamento(equipamento)">
