@@ -20,8 +20,8 @@ export class EquipamentoService {
         return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos/page/?ambiente=${ambiente_id}`);
     }
     
-    findPortas(ambiente_id : string, equipamento_porta : string) : Observable<EquipamentoDTO[]>{
-        return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos/${ambiente_id}/${equipamento_porta}/portas`);
+    findPortas(dispositivo_id : string, equipamento_porta : string) : Observable<EquipamentoDTO[]>{
+        return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos/${dispositivo_id}/${equipamento_porta}/portas`);
            ///findPortas/?ambiente=${ambiente_id}`);
     }
 

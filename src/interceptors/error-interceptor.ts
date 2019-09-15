@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx'; // IMPORTANTE: IMPORT ATUALIZADO
 import { StorageService } from '../services/storage.service';
-import { AlertController } from 'ionic-angular';
+import { AlertController} from 'ionic-angular';
 import { FieldMessage } from '../models/fieldmessage';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-    constructor(public storage : StorageService, public alertCtrl : AlertController){        
+    constructor(
+        public storage : StorageService, 
+        public alertCtrl : AlertController ){
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -27,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             switch(errorObj.status){
                 case 102:
-                    this.handle102(errorObj);
+                    this.handle102(errorObj);                
                     break;
 
                 case 401:
@@ -36,11 +38,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                 case 403 :  
                     this.handle403();
+                    
                     break;
 
                 case 422 : 
                     this.handle422(errorObj);
                     break;
+
                 case 500 : 
                     this.handle500();
                     break;        
@@ -61,8 +65,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             enableBackdropDismiss: false,
             buttons: [
                 {
-                    text: 'OK',
-                }
+                    text: 'OK',                    
+                }                
             ]
         });
         alert.present();

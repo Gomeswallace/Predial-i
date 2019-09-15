@@ -42,6 +42,8 @@ ionViewDidLoad() {
         this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
     },    
     error => {});
+
+    console.log(this.dispositivo);
 }  
 
 private setupPageTitle(){
@@ -51,8 +53,8 @@ private setupPageTitle(){
 createFrom(){
   this.formGroup = this.formBuilder.group({
     id: [this.dispositivo.id],
-    nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-    descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+    nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
+    descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     idTipo: [this.dispositivo.dispositivoTipo, [Validators.required]]
   });
 }

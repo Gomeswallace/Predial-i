@@ -13,7 +13,8 @@ export class AmbientesPage {
 
   ambientes: AmbienteDTO[];
   dispositivo_id = this.navParams.get('dispositivo_id');
-
+  dispositivo_nome = this.navParams.get('dispositivo_nome');
+  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -30,8 +31,8 @@ export class AmbientesPage {
             error => {});
   }
 
-  showEquipamentos(ambiente_id: string){
-    this.navCtrl.push('EquipamentosPage', {ambie_id: ambiente_id});
+  showEquipamentos(ambiente: AmbienteDTO){
+    this.navCtrl.push('EquipamentosPage', {ambiente_param: ambiente});
   }
 
   addAmbiente(){

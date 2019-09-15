@@ -10,8 +10,6 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(public storage : StorageService){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("PASSOU NO AUTH...")
-
         let localUser = this.storage.getLocalUser();
 
         //garantir que a requisicao e para o nosso WebService e add o Authorization na requisicao

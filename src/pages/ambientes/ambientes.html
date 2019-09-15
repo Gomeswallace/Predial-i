@@ -4,6 +4,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>Ambientes</ion-title>
+      <ion-title>do Dispositivo: {{dispositivo_nome}}</ion-title>
     </ion-navbar>
   </ion-header>
   
@@ -14,7 +15,7 @@
             <h2>Nome: {{ ambiente.nome }}</h2>
             <p>Descricao: {{ ambiente.descricao }}</p>
             <p> 
-              <button ion-button clear icon-start color="primary" (click)="showEquipamentos(ambiente.id)">
+              <button ion-button clear icon-start color="primary" (click)="showEquipamentos(ambiente)">
                 <ion-icon name='home' ></ion-icon> Equipamentos</button>
             </p>
             <p>

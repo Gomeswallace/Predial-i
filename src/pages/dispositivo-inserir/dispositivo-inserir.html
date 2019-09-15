@@ -41,7 +41,9 @@
     <p class="danger" *ngIf="!formGroup.controls.idTipo.valid && (formGroup.controls.idTipo.dirty || formGroup.controls.idTipo.touched)" margin-left>Valor Inválido</p>
   </div>
   <div *ngIf="!novoDispositivo">
-      <h2>Tipo: {{ disp.dispositivoTipo }} - {{ disp.dispositivoTipo }}</h2>
+    <ion-item>
+      Tipo: {{ dispositivo.dispositivoTipo.id }} - {{ dispositivo.dispositivoTipo.nome }}
+    </ion-item>
   </div>
 </form>
   <div padding>

@@ -14,7 +14,7 @@
       <h2>Nome: {{ disp.nome }}</h2>
       <p>Descrição: {{ disp.descricao }}</p>  
       <p >
-        <button ion-button clear icon-start color="primary" (click)="showAmbientes(disp.id)"> 
+        <button ion-button clear icon-start color="primary" (click)="showAmbientes(disp.id, disp.nome)"> 
           <ion-icon name='home' ></ion-icon> Ambientes</button>
       </p>
       <p>

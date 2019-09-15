@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { EquipamentoDTO } from '../../models/equipamento.dto';
 import { EquipamentoService } from '../../services/domain/equipamento.service';
+import { AmbienteDTO } from '../../models/ambiente.dto';
 
 @IonicPage()
 @Component({
@@ -11,29 +12,33 @@ import { EquipamentoService } from '../../services/domain/equipamento.service';
 export class EquipamentosPage {
 
   equipamentos : EquipamentoDTO[]; 
-  ambiente_id = this.navParams.get('ambie_id'); 
+  ambiente: AmbienteDTO;
+  //ambiente: this.navParams.get(ambiente_param); 
+  //ambiente_nome = this.navParams.get('ambie_nome'); 
   
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public equipamentoService: EquipamentoService,
     public toast: ToastController) {
+      this.ambiente = this.navParams.data.ambiente_param;
   }
 
   ionViewDidLoad() {    
-    this.equipamentoService.findByAmbiente(this.ambiente_id)
+    console.log(this.ambiente);
+    this.equipamentoService.findByAmbiente(this.ambiente.id)
         .subscribe(response => {
           this.equipamentos = response;
         },
         error => {});
   }
 
-  addEquipamento(){
-    this.navCtrl.push('EquipamentoInserirPage', {amb_id: this.ambiente_id});
+  addEquipamento(){    
+    this.navCtrl.push('EquipamentoInserirPage', {ambie_param: this.ambiente});
   }
 
-  editEquipamento(equip : EquipamentoDTO ){
-    this.navCtrl.push('EquipamentoInserirPage', {equipamento : equip, amb_id: this.ambiente_id});
+  editEquipamento(equip : EquipamentoDTO){
+    this.navCtrl.push('EquipamentoInserirPage', {equipamento : equip, ambie_param : this.ambiente});
   }
 
   removeEquipamento(id : string){

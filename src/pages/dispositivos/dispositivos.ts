@@ -28,8 +28,8 @@ export class DispositivosPage {
       error => {});
   }
 
-  showAmbientes(disp_id: string){
-    this.navCtrl.push('AmbientesPage', {dispositivo_id: disp_id});
+  showAmbientes(disp_id: string, disp_nome: string){
+    this.navCtrl.push('AmbientesPage', {dispositivo_id: disp_id, dispositivo_nome: disp_nome});
   }
 
   addDispositivo(){
