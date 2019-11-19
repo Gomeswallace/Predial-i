@@ -40,10 +40,9 @@ ionViewDidLoad() {
     .subscribe(response => {
         this.tipos = response;
         this.formGroup.controls.idTipo.setValue(this.tipos[0].id);
+        console.log(this.dispositivo);
     },    
     error => {});
-
-    console.log(this.dispositivo);
 }  
 
 private setupPageTitle(){
@@ -55,14 +54,16 @@ createFrom(){
     id: [this.dispositivo.id],
     nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
     descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    ip: [this.dispositivo.ip, [Validators.required, Validators.minLength(12), Validators.maxLength(15)]],
     idTipo: [this.dispositivo.dispositivoTipo, [Validators.required]]
   });
 }
 
 onSubmit(){
   if(this.formGroup.valid){
+    console.log(this.dispositivo);
     this.dispositivoService.insert(this.formGroup.value)
-    .subscribe(response => {
+    .subscribe(response => {      
       this.showInsertOk();
       //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
       //this.navCtrl.setRoot('DispositivosPage');

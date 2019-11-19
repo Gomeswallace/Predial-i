@@ -30,7 +30,13 @@
         O campo é obrigatório!
       </div>  
     </ion-item>
-  -->
+    -->
+    <ion-item>
+      <ion-label stacked>Endereço IP</ion-label>
+      <ion-input type="text" formControlName="ip"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="!formGroup.controls.ip.valid && (formGroup.controls.ip.dirty || formGroup.controls.ip.touched)" margin-left>Valor inválido</p>
+    
   <div *ngIf="novoDispositivo">
     <ion-item >
       <ion-label stacked>Tipo Dispositivo*</ion-label>

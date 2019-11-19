@@ -12,7 +12,8 @@
     <ion-item *ngFor="let disp of dispositivos">
       <h3><ion-note>Código: {{ disp.id }}</ion-note></h3>
       <h2>Nome: {{ disp.nome }}</h2>
-      <p>Descrição: {{ disp.descricao }}</p>  
+      <h2>Endereço Ip: {{ disp.ip }}</h2>
+      <p>Descrição: {{ disp.descricao }}</p> 
       <p >
         <button ion-button clear icon-start color="primary" (click)="showAmbientes(disp.id, disp.nome)"> 
           <ion-icon name='home' ></ion-icon> Ambientes</button>

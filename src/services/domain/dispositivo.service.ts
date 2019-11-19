@@ -33,5 +33,4 @@ export class DispositivoService {
     delete(id: string){
         return this.http.delete<DispositivoDTO>(`${API_CONFIG.baseUrl}/dispositivos/${id}`);
     }
-
 }

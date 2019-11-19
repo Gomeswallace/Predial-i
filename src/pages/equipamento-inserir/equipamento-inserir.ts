@@ -77,7 +77,7 @@ export class EquipamentoInserirPage {
         if(this.novoEquipamento){
           this.formGroup.controls.tipo.setValue(this.tipos[0].id);
         }else{
-          this.formGroup.controls.tipo.setValue(this.equipamento.tipo.id.toString());
+          this.formGroup.controls.tipo.setValue(this.equipamento.tipo.toString());
         }
       },
       error => {});
