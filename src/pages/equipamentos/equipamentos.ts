@@ -24,8 +24,7 @@ export class EquipamentosPage {
       this.ambiente = this.navParams.data.ambiente_param;
   }
 
-  ionViewDidLoad() {    
-    console.log(this.ambiente);
+  ionViewDidLoad() { 
     this.equipamentoService.findByAmbiente(this.ambiente.id)
         .subscribe(response => {
           this.equipamentos = response;

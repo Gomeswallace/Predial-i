@@ -22,7 +22,7 @@ export class EquipamentoInserirPage {
   portas: Array<any> = new Array; 
   porta: string;
   tipos: EquipamentoTipoDTO[];
-  //tipoEquipamento:  EquipamentoTipoDTO;
+  tipoEquipamento:  EquipamentoTipoDTO;
   novoEquipamento: boolean = false;
   status: boolean;
   porta_equip: string;
@@ -54,9 +54,9 @@ export class EquipamentoInserirPage {
       nome: [this.equipamento.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
       porta: [this.equipamento.porta, [Validators.required]],      
       status: [this.equipamento.status], 
-      tipo: [this.equipamento.tipo, [Validators.required]]
-      //ambienteId: [this.ambiente.id.toString()]
-    });     
+      tipo: [this.equipamento.tipo, [Validators.required]],
+      ambienteId: [this.ambiente.id.toString()]
+    }); 
   }
 
   private setupPageTitle(){
@@ -64,8 +64,8 @@ export class EquipamentoInserirPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.ambiente)
     this.dispositivo_id = this.ambiente.dispositivoId.toString();
+    this.equipamento.ambienteId = this.ambiente.id;
     this.findTipoEquipamento();
     this.findPortas();
   }
@@ -73,24 +73,25 @@ export class EquipamentoInserirPage {
   findTipoEquipamento(){
     this.equipamentoTipoService.findAll()      
       .subscribe(response => {
-        this.tipos = response;
-        if(this.novoEquipamento){
+        this.tipos = response;        
+        if(this.novoEquipamento){        
           this.formGroup.controls.tipo.setValue(this.tipos[0].id);
-        }else{
-          this.formGroup.controls.tipo.setValue(this.equipamento.tipo.toString());
+        }else{          
+          console.log(this.equipamento.tipo);
+          console.log(this.tipos);
+          this.formGroup.controls.tipo.setValue(this.equipamento.tipo.id);
         }
       },
       error => {});
   }
 
   findPortas(){
-    console.log(this.ambiente);
     this.porta_equip = this.equipamento.porta == null ? Number(0).toString() : this.equipamento.porta;
     this.equipamentoService.findPortas(this.dispositivo_id, this.porta_equip)
       .subscribe(response => {
         this.portas = response;
         if(this.novoEquipamento){
-          this.formGroup.controls.porta.setValue(this.portas[0]);
+          this.formGroup.controls.porta.setValue(this.portas[0].id);
         }else{        
           this.formGroup.controls.porta.setValue(this.equipamento.porta.toString());
         }        
@@ -99,7 +100,6 @@ export class EquipamentoInserirPage {
   }
 
   onSubmit(){
-    console.log(this.status);
     this.equipamento.status = this.formGroup.value.status;
     if(this.formGroup.valid){
       this.equipamentoService.insert(this.formGroup.value)

@@ -61,9 +61,8 @@ createFrom(){
 
 onSubmit(){
   if(this.formGroup.valid){
-    console.log(this.dispositivo);
     this.dispositivoService.insert(this.formGroup.value)
-    .subscribe(response => {      
+    .subscribe(response => {
       this.showInsertOk();
       //this.toast.create({ message : 'Dispositivo cadastrado com sucesso!', duration: 3000 }).present();
       //this.navCtrl.setRoot('DispositivosPage');
