@@ -25,6 +25,10 @@ export class EquipamentoService {
            ///findPortas/?ambiente=${ambiente_id}`);
     }
 
+    findIdTipo(equipamento_id : string) : Observable<string>{
+        return this.http.get<string>(`${API_CONFIG.baseUrl}/equipamentos/findIdTipo/${equipamento_id}`);
+    }
+
     insert(equipamento: EquipamentoDTO){   
         if(equipamento.id){
             return this.http.put<EquipamentoDTO>(`${API_CONFIG.baseUrl}/equipamentos/${equipamento.id}`, equipamento);

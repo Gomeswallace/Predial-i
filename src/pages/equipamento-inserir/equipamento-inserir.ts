@@ -42,7 +42,7 @@ export class EquipamentoInserirPage {
         this.novoEquipamento = this.navParams.data.equipamento ? false : true;  
         this.equipamento = this.navParams.data.equipamento || {};
         this.ambiente = this.navParams.data.ambie_param;
-        //this.tipo_id = this.navParams.data.equipamento.tipo || {};
+        //this.tipo_id = this.navParams.data.equipamento.tipo.id || {};
         this.setupPageTitle();
         this.createFrom();
         this.status = this.formGroup.value.status;
@@ -51,7 +51,7 @@ export class EquipamentoInserirPage {
   createFrom(){    
     this.formGroup = this.formBuilder.group({
       id: [this.equipamento.id],
-      nome: [this.equipamento.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      nome: [this.equipamento.nome, [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
       porta: [this.equipamento.porta, [Validators.required]],      
       status: [this.equipamento.status], 
       tipo: [this.equipamento.tipo, [Validators.required]],
@@ -66,8 +66,10 @@ export class EquipamentoInserirPage {
   ionViewDidLoad() {
     this.dispositivo_id = this.ambiente.dispositivoId.toString();
     this.equipamento.ambienteId = this.ambiente.id;
+    
+    this.findIdTipo();
     this.findTipoEquipamento();
-    this.findPortas();
+    this.findPortas();    
   }
 
   findTipoEquipamento(){
@@ -76,10 +78,8 @@ export class EquipamentoInserirPage {
         this.tipos = response;        
         if(this.novoEquipamento){        
           this.formGroup.controls.tipo.setValue(this.tipos[0].id);
-        }else{          
-          console.log(this.equipamento.tipo);
-          console.log(this.tipos);
-          this.formGroup.controls.tipo.setValue(this.equipamento.tipo.id);
+        }else{
+          this.formGroup.controls.tipo.setValue(this.tipo_id) //this.equipamento.tipo.id);
         }
       },
       error => {});
@@ -97,6 +97,17 @@ export class EquipamentoInserirPage {
         }        
       },
       error => {});  
+  }
+
+  findIdTipo(){
+    if(!this.novoEquipamento){
+      this.equipamentoService.findIdTipo(this.equipamento.id)      
+      .subscribe(response => {
+        this.tipo_id = response;
+        this.formGroup.controls.tipo.setValue(this.tipo_id)        
+      },
+      error => {});
+    }
   }
 
   onSubmit(){

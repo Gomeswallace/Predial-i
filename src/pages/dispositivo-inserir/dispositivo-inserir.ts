@@ -52,9 +52,9 @@ private setupPageTitle(){
 createFrom(){
   this.formGroup = this.formBuilder.group({
     id: [this.dispositivo.id],
-    nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-    descricao: [this.dispositivo.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-    ip: [this.dispositivo.ip, [Validators.required, Validators.minLength(12), Validators.maxLength(15)]],
+    nome: [this.dispositivo.nome, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+    descricao: [this.dispositivo.descricao],
+    ip: [this.dispositivo.ip, [Validators.required, Validators.minLength(11), Validators.maxLength(15)]],
     idTipo: [this.dispositivo.dispositivoTipo, [Validators.required]]
   });
 }

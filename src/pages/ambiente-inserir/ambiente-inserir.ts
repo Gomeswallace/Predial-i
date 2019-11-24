@@ -39,8 +39,8 @@ private setupPageTitle(){
 createFrom(){
   this.formGroup = this.formBuilder.group({
     id: [this.ambiente.id],
-    nome: [this.ambiente.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-    descricao: [this.ambiente.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+    nome: [this.ambiente.nome, [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
+    descricao: [this.ambiente.descricao],
     dispositivoId: [this.navParams.data.disp_id]
   });
 }
